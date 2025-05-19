@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Auto Click Iframe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+
+<body>
+  <header>
+    <img src="images/logo.png" alt="Logo do Projeto">
+    <h1>Auto Click Iframe</h1>
+    <p>Esta extensão permite injetar e executar cliques automáticos em sites e iframes dinâmicos de forma prática e eficiente.</p>
+
+    <div class="botao-container">
+      <button class="botao-esquerda" onclick="window.location.href='https://www.exeplo.com'">Download</button>
+      <button class="botao-direita" onclick="rolarParaDoacao()">Apoiar</button>
+    </div>
+  </header>
+
+  <!-- Modal de imagem -->
+  <div id="modal" class="modal">
+    <span class="modal-close" onclick="fecharModal()">&times;</span>
+    <img class="modal-content" id="modal-img">
+  </div>
+
+  <main>
+    <!-- CARD 1 -->
+    <div class="card-container">
+      <div class="card-view">
+        <img id="img1" class="fade-target" src="images/screen_01.jpg" alt="Imagem 1">
+      </div>
+      <p id="text1" class="card-text" style="color: purple; font-weight: bold;">Introdução.</p>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card-container">
+      <div class="card-view">
+        <img id="img2" class="fade-target" src="images/screen_02.jpg" alt="Imagem 2">
+      </div>
+      <p id="text2" class="card-text" style="color: purple; font-weight: bold;">Passo: 01.</p>
+    </div>
+
+    <!-- Seção Mídia -->
+    <div class="midia-section">
+      <h2>Mídia</h2>
+
+      <div class="gif-container">
+        <img src="images/intro.gif" alt="Introdução">
+        <p><strong></strong></p>
+      </div>
+
+      <div class="gif-container">
+        <img src="images/xpath.gif" alt="Detectar Xpath">
+        <p><strong>Essas capturas foram realizadas em tempo real para ilustrar o processo de inserção dinâmica do iframe do jogo na página. Após a detecção e carregamento correto do iframe, utilizamos o XPath correspondente ao botão ou elemento desejado, permitindo que a extensão execute cliques automáticos com precisão e no momento certo.</strong></p>
+      </div>
+    </div>
+
+    <!-- Seção de Planos -->
+    <div class="planos-card">
+      <div class="plano">
+        <h3>Plano Gratuito</h3>
+        <ul>
+          <li>Acesso limitado a 2 XPaths</li>
+          <li>100 repetições por execução</li>
+          <li>Limite de 1 hora diário</li>
+        </ul>
+      </div>
+      <div class="divisor"></div>
+      <div class="plano">
+        <h3>Plano de Apoio</h3>
+        <ul>
+          <li>Mais de 15 XPaths disponíveis</li>
+          <li>Repetições ilimitadas</li>
+          <li>Tempo de uso sem restrições</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Seção de Doação/Assinatura -->
+    <div class="card-container" style="margin-top: 40px;">
+      <div class="card-view doacao-view">
+        <div class="doacao-texto">
+          <h3>Como Apoiar o Projeto</h3>
+          <p>Este projeto ainda está em fase inicial e, por enquanto, não conta com sistemas de pagamento automatizados.</p>
+          <p>Se você deseja apoiar e obter acesso completo, é possível contribuir via PayPal.</p>
+          <p><strong>Email do PayPal:</strong> <span id="paypal-email">justinojoseraanheque7@gmail.com</span></p>
+          <button onclick="copiarEmail()">Copiar Email</button>
+          <p>Após a contribuição, envie um comprovativo (screenshot) para o mesmo email, juntamente com o seu <strong>ID</strong> (visível na interface da extensão), para validarmos sua assinatura.</p>
+          <p>Sugerimos um apoio simbólico a partir de <strong>5 dólares</strong>, mas qualquer valor é bem-vindo e muito importante para a continuidade e evolução deste projeto.</p>
+          <p>Seu apoio é essencial para manter e melhorar esta extensão. Muito obrigado!</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="index.js"></script>
+</body>
+</html>
