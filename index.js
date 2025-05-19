@@ -1,14 +1,14 @@
 const imagens = [
-  ["./images/screen_02.jpg", "Passo: 01."],
-  ["./images/screen_03.jpg", "Passo: 02."],
-  ["./images/screen_03.jpg", "Passo: 02."],
-  ["./images/screen_04.jpg", "Passo: 03."],
-  [".//screen_04.jpg", "Passo: 03."],
-  ["./images/screen_05.jpg", "Passo: 04."],
-  ["./images/screen_05.jpg", "Passo: 04."],
-  ["./images/screen_01.jpg", "Introdução."],
-  ["./images/screen_01.jpg", "Introdução."],
-  ["./images/screen_02.jpg", "Passo: 01."]
+  ["./images/Screen_02.jpg", "Passo: 01."],
+  ["./images/Screen_03.jpg", "Passo: 02."],
+  ["./images/Screen_03.jpg", "Passo: 02."],
+  ["./images/Screen_04.jpg", "Passo: 03."],
+  ["./images/Screen_04.jpg", "Passo: 03."],
+  ["./images/Screen_05.jpg", "Passo: 04."],
+  ["./images/Screen_05.jpg", "Passo: 04."],
+  ["./images/Screen_01.jpg", "Introdução."],
+  ["./images/Screen_01.jpg", "Introdução."],
+  ["./images/Screen_02.jpg", "Passo: 01."]
 ];
 
 let index = 0;
