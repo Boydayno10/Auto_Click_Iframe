@@ -26,22 +26,57 @@
     <img class="modal-content" id="modal-img">
   </div>
 
-  <main>
-    <!-- CARD 1 -->
-    <div class="card-container">
-      <div class="card-view">
-        <img id="img1" class="fade-target" src="./images/Screen_01.jpg" alt="Imagem 1">
-      </div>
-      <p id="text1" class="card-text" style="color: purple; font-weight: bold;">Introdução.</p>
+ <main>
+  <!-- CARD 1 -->
+  <div class="card-container">
+    <div class="card-view">
+      <img id="img1" class="fade-target" src="./images/Screen_01.jpg" alt="Imagem 1">
     </div>
+    <p id="text1" class="card-text" style="color: purple; font-weight: bold;">Introdução.</p>
+  </div>
 
-    <!-- CARD 2 -->
-    <div class="card-container">
-      <div class="card-view">
-        <img id="img2" class="fade-target" src="./images/Screen_02.jpg" alt="Imagem 2">
-      </div>
-      <p id="text2" class="card-text" style="color: purple; font-weight: bold;">Passo: 01.</p>
+  <!-- CARD 2 -->
+  <div class="card-container">
+    <div class="card-view">
+      <img id="img2" class="fade-target" src="./images/Screen_02.jpg" alt="Imagem 2">
     </div>
+    <p id="text2" class="card-text" style="color: purple; font-weight: bold;">Passo: 01.</p>
+  </div>
+</main>
+
+<script>
+  const imagens = [
+    ["./images/Screen_02.jpg", "Passo: 01."],
+    ["./images/Screen_03.jpg", "Passo: 02."],
+    ["./images/Screen_03.jpg", "Passo: 02."],
+    ["./images/Screen_04.jpg", "Passo: 03."],
+    ["./images/Screen_04.jpg", "Passo: 03."],
+    ["./images/Screen_05.jpg", "Passo: 04."],
+    ["./images/Screen_05.jpg", "Passo: 04."],
+    ["./images/Screen_01.jpg", "Introdução."],
+    ["./images/Screen_01.jpg", "Introdução."],
+    ["./images/Screen_02.jpg", "Passo: 01."]
+  ];
+
+  let index = 0;
+
+  function fadeTransition(imgElement, textElement, newSrc, newText) {
+    imgElement.classList.add("fade-in");
+    setTimeout(() => {
+      imgElement.src = newSrc;
+      textElement.innerHTML = `<span style="color: #9C27B0; font-weight: bold;">${newText}</span>`;
+      imgElement.classList.remove("fade-in");
+    }, 400);
+  }
+
+  // Exemplo de troca automática a cada 2 segundos no CARD 2
+  const img2 = document.getElementById("img2");
+  const text2 = document.getElementById("text2");
+
+
+</script>
+
+
 
     <!-- Seção Mídia -->
     <div class="midia-section">

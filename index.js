@@ -1,26 +1,3 @@
-const imagens = [
-  ["./images/Screen_02.jpg", "Passo: 01."],
-  ["./images/Screen_03.jpg", "Passo: 02."],
-  ["./images/Screen_03.jpg", "Passo: 02."],
-  ["./images/Screen_04.jpg", "Passo: 03."],
-  ["./images/Screen_04.jpg", "Passo: 03."],
-  ["./images/Screen_05.jpg", "Passo: 04."],
-  ["./images/Screen_05.jpg", "Passo: 04."],
-  ["./images/Screen_01.jpg", "Introdução."],
-  ["./images/Screen_01.jpg", "Introdução."],
-  ["./images/Screen_02.jpg", "Passo: 01."]
-];
-
-let index = 0;
-
-function fadeTransition(imgElement, textElement, newSrc, newText) {
-  imgElement.classList.add("fade-in");
-  setTimeout(() => {
-    imgElement.src = newSrc;
-    textElement.innerHTML = `<span style="color: #9C27B0; font-weight: bold;">${newText}</span>`;
-    imgElement.classList.remove("fade-in");
-  }, 400);
-}
 
 setInterval(() => {
   const i1 = index % imagens.length;
