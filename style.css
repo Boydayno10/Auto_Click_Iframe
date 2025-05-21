@@ -1,9 +1,24 @@
-/* Fonte limpa e fundo suave */
-body {
+/* Garante que tudo respeite a largura da tela e não cause overflow */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to bottom, #d3d3e0, #c4cadb);
   color: #333;
   margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Evita zoom/deslocamento horizontal no mobile */
+body {
+  touch-action: manipulation;
 }
 
 /* Cabeçalho bonito e centralizado */
@@ -33,7 +48,9 @@ main {
   flex-wrap: wrap;
   gap: 60px;
   justify-content: center;
-  padding-bottom: 40px;
+  padding: 0 20px 40px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .card-container {
@@ -41,6 +58,7 @@ main {
   flex-direction: column;
   align-items: center;
   max-width: 500px;
+  width: 100%;
 }
 
 .card-view {
@@ -75,184 +93,13 @@ main {
   color: #444;
 }
 
-/* Mídia com estilo aprimorado */
-.midia-section {
-  width: 100%;
-  margin-top: 60px;
-  padding: 20px;
-  background: linear-gradient(to bottom, #d9deeb, #cac9d3);
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.midia-section h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-  color: #cc0000;       /* vermelho elegante */
-  text-align: center;
-  font-weight: bold;
-}
-
-/* Estilo para os GIFs */
-.gif-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  width: 100%;
-  max-width: 1000px;
-  margin: 20px auto;
-}
-
-.gif-container img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-}
-
-.gif-container p {
-  font-size: 14px;
-  color: #222;
-  text-align: justify;
-}
-
-
-/* Responsividade */
-@media (max-width: 768px) {
-  main {
-    gap: 30px;
-  }
-
-  .card-container {
-    max-width: 90%;
-  }
-
-  .gif-container {
-    max-width: 95%;
-  }
-
-  .gif-container p {
-    font-size: 14px;
-  }
-
-  .midia-section h2 {
-    font-size: 22px;
-  }
-}
-
-.planos-card {
-  background: linear-gradient(to right, #f0f4ff, #ffffff);
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  margin-top: 60px;
-  display: flex;
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-  transition: box-shadow 0.3s ease;
-}
-
-.planos-card:hover {
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
-}
-
-.plano {
-  flex: 1;
-  padding: 40px 30px;
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.85);
-}
-
-.plano ul {
-  list-style: none;
-  padding: 0;
-  text-align: center;
-}
-
-.plano ul li {
-  text-align: justify;
-}
-.plano ul li {
-  margin: 12px 0;
-  font-size: 16px;
-  color: #333;
-  position: relative;
-  padding-left: 20px;
-}
-
-.plano ul li::before {
-  content: "✔";
-  color: #007acc;
-  font-weight: bold;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-
-.divisor {
-  width: 2px;
-  background: #ccc;
-}
-
-@media (max-width: 768px) {
-  .planos-card {
-    flex-direction: column;
-  }
-
-  .divisor {
-    display: none;
-  }
-
-  .plano {
-    border-bottom: 1px solid #eee;
-  }
-
-  .plano:last-child {
-    border-bottom: none;
-  }
-}
-
-
-
-.doacao-texto {
-  padding: 15px 20px;
-}
-
-.doacao-texto h3 {
-  font-size: 22px;
-  color: #003366;
-  margin-bottom: 10px;
-}
-
-.doacao-texto p {
-  font-size: 15px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.doacao-texto button {
-  background-color: #003366;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-bottom: 15px;
-}
-
-.doacao-texto button:hover {
-  background-color: #0055aa;
-}
 .botao-container {
   display: flex;
   justify-content: space-between;
   max-width: 300px;
   margin: 25px auto 0;
   gap: 20px;
+  width: 100%;
 }
 
 .botao-esquerda,
@@ -273,8 +120,6 @@ main {
 .botao-direita:hover {
   background-color: #005fa3;
 }
-
-
 
 /* Modal para visualização ampliada */
 .modal {
@@ -316,4 +161,17 @@ main {
 
 .fade-in {
   opacity: 0;
+}
+
+/* Rodapé com as mesmas cores do cabeçalho */
+footer {
+  background: linear-gradient(135deg, #002244 0%, #004488 50%, #0077cc 100%);
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  margin-top: 50px;
+  border-radius: 25px 25px 0 0;
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 10;
 }
