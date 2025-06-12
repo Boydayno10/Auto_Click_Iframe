@@ -47,11 +47,11 @@ Os XPaths são essenciais para a extensão localizar e interagir com os elemento
 
 Visite nossa seção de teste para experimentar a funcionalidade da extensão em tempo real:
 
-[Acesse a Seção de Teste](https://seusite.com/#teste) Nesta seção, você encontrará diversos campos de formulário e botões com seus XPaths correspondentes para praticar a automação.
+[Acesse a Seção de Teste](https://boydayno10.github.io/Auto_Click_Iframe/#teste) Nesta seção, você encontrará diversos campos de formulário e botões com seus XPaths correspondentes para praticar a automação.
 
 ## 🔒 Política de Privacidade
 
-Sua privacidade é nossa prioridade. A extensão "Auto Clicker & Form Helper" **não coleta, armazena, monitora, transmite ou compartilha quaisquer dados pessoais identificáveis ou informações de navegação** com o desenvolvedor ou terceiros. Todas as configurações e dados inseridos pelo usuário são armazenados **exclusivamente de forma local** no seu navegador (utilizando a API `chrome.storage.local`). Para mais detalhes, consulte nossa [Política de Privacidade](https://seusite.com/#politicas). ## 🤝 Contribuição
+Sua privacidade é nossa prioridade. A extensão "Auto Clicker & Form Helper" **não coleta, armazena, monitora, transmite ou compartilha quaisquer dados pessoais identificáveis ou informações de navegação** com o desenvolvedor ou terceiros. Todas as configurações e dados inseridos pelo usuário são armazenados **exclusivamente de forma local** no seu navegador (utilizando a API `chrome.storage.local`). Para mais detalhes, consulte nossa [Política de Privacidade](https://boydayno10.github.io/Auto_Click_Iframe/#politicas). ## 🤝 Contribuição
 
 Atualmente, não aceitamos contribuições externas. No entanto, feedback e sugestões são sempre bem-vindos!
 
