@@ -1,4 +1,4 @@
-# Auto Clicker & Form Helper (Auto_Click_Iframe)
+# Auto Clicker & Form Helper
 
 ![Banner ou Screenshot da Extensão](images/Promo_02.png) Uma extensão poderosa para o Google Chrome, desenvolvida para **automatizar cliques e preenchimento de formulários** em sites e iframes dinâmicos. O Auto Clicker & Form Helper otimiza sua produtividade, simplificando tarefas repetitivas na web de forma prática e intuitiva.
 
