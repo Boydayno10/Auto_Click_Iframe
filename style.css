@@ -2,176 +2,1518 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-html, body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to bottom, #d3d3e0, #c4cadb);
-  color: #333;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden;
+html {
+    height: 100%;
+    /* Essencial para o sticky footer */
 }
 
-/* Evita zoom/deslocamento horizontal no mobile */
 body {
-  touch-action: manipulation;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--background-light);
+    /* Usando variável de tema */
+    color: var(--text-color-light);
+    /* Usando variável de tema */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100vw;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease-out;
+    touch-action: manipulation;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* Cabeçalho bonito e centralizado */
+/* --- Cores Base (usadas para o menu também) --- */
+:root {
+    /* Cores padrão (tema claro) */
+    --primary-dark: #002244;
+    --primary-medium: #004488;
+    --primary-light: #0077cc;
+    --button-blue: #007acc;
+    --button-blue-hover: #005fa3;
+
+    /* Variáveis de tema claro */
+    --background-light: linear-gradient(to bottom, #d3d3e0, #c4cadb);
+    --text-color-light: #333;
+    --background-header-light: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--primary-light) 100%);
+    --text-color-header-light: white;
+    --background-main-light: white;
+    --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --border-bottom-light: 2px solid #eee;
+    --footer-background-light: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--primary-light) 100%);
+    --footer-text-color-light: white;
+    --image-caption-color-light: #333;
+    --body-text-color-light: #333;
+
+    /* Overlay para legenda flutuante (claro) */
+    --caption-overlay-background: rgba(255, 255, 255, 0.85);
+    --caption-overlay-text: #333;
+}
+
+/* Tema escuro */
+:root.dark-theme {
+    --background-light: #1a1a2e;
+    --text-color-light: #e0e0e0;
+    --background-header-light: linear-gradient(135deg, #0f0f1d 0%, #1e1e3f 50%, #2a2a50 100%);
+    --text-color-header-light: #e0e0e0;
+    --background-main-light: #282840;
+    --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.5);
+    --border-bottom-light: #555; /* Corrigido, era 2px solid #555 */
+    --footer-background-light: linear-gradient(135deg, #0f0f1d 0%, #1e1e3f 50%, #2a2a50 100%);
+    --footer-text-color-light: #e0e0e0;
+    --button-blue: #6a9bd8;
+    --button-blue-hover: #4e7db8;
+    --image-caption-color-light: #bbbbbb;
+    --body-text-color-light: #e0e0e0;
+
+    /* Overlay para legenda flutuante (escuro) */
+    --caption-overlay-background: rgba(0, 0, 0, 0.85);
+    --caption-overlay-text: #e0e0e0;
+}
+
+/* --- Cabeçalho Geral (Contêiner Pai) --- */
 header {
-  background: linear-gradient(135deg, #002244 0%, #004488 50%, #0077cc 100%);
-  color: white;
-  padding: 40px 20px;
-  text-align: center;
-  margin-bottom: 50px;
-  border-radius: 0 0 25px 25px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  position: relative;
-  z-index: 10;
+    background: var(--background-header-light);
+    color: var(--text-color-header-light);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 10;
+    transition: background 0.3s ease, color 0.3s ease;
+    flex-shrink: 0;
+    overflow: hidden;
+    width: 100%;
 }
 
-header img {
-  max-width: 90px;
-  height: auto;
-  margin: 0 auto 15px auto;
-  display: block;
-  border-radius: 10px;
+/* --- BARRA SUPERIOR FIXA --- */
+.top-header-bar {
+    background: var(--background-header-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 15px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease;
 }
 
-/* Cards organizados */
-main {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 60px;
-  justify-content: center;
-  padding: 0 20px 40px;
-  max-width: 100%;
-  overflow-x: hidden;
+.fixed-bar-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
-.card-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 500px;
-  width: 100%;
+:root.dark-theme .fixed-bar-stars {
+    opacity: 1;
 }
 
-.card-view {
-  background-color: white;
-  border-radius: 15px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  overflow: hidden;
-  width: 100%;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  min-height: 300px;
+/* --- Conteúdo Principal do Cabeçalho (Não Fixo) --- */
+.main-header-content {
+    text-align: center;
+    padding: 0 20px 40px;
+    padding-top: 100px;
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
-.card-view img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  flex-grow: 1;
+.header-main-title-mobile {
+    display: none; /* Por padrão, escondido em desktop */
 }
 
-.card-view:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+.header-main-title-desktop {
+    font-size: 2.8em;
+    font-weight: bold;
+    margin: 0 0 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: var(--text-color-header-light);
 }
 
-.card-text {
-  margin-top: 20px;
-  font-size: 16px;
-  text-align: center;
-  color: #444;
+/* Botão de Menu Hambúrguer (Três Pontos) */
+.hamburger-menu {
+    display: none; /* Por padrão, escondido em desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1000;
 }
 
+.hamburger-menu .dot {
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 3px 0;
+}
+
+/* Botão de alternância de tema */
+.theme-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    fill: var(--text-color-header-light);
+    transition: fill 0.3s ease;
+    order: 2;
+}
+
+.theme-toggle svg {
+    display: block;
+}
+
+.theme-toggle:hover {
+    opacity: 0.8;
+}
+
+/* Conteúdo introdutório (parágrafo e botões) */
+.main-header-content p {
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+/* --- Menu Navbar (Modo Desktop: visível e na esquerda do header) --- */
+.navbar {
+    position: static; /* No desktop, o menu é estático */
+    top: auto;
+    left: auto;
+    transform: none;
+    width: auto;
+    height: auto;
+    background: none;
+    box-shadow: none;
+    transition: none;
+    z-index: 100;
+    display: block; /* Visível no desktop */
+    padding-top: 0;
+    right: auto;
+    margin-left: 0;
+    order: 1;
+
+    .menu-header {
+        display: none; /* Escondido no desktop */
+    }
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+}
+
+.navbar li {
+    display: inline-block;
+    width: auto;
+}
+
+.navbar a {
+    color: var(--text-color-header-light);
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    border-bottom: none;
+}
+
+.navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Botões de Ação (Download e Documentação) --- */
 .botao-container {
-  display: flex;
-  justify-content: space-between;
-  max-width: 300px;
-  margin: 25px auto 0;
-  gap: 20px;
-  width: 100%;
+    display: flex;
+    justify-content: center;
+    max-width: 400px;
+    margin: 25px auto 0;
+    gap: 20px;
+    width: 100%;
 }
 
 .botao-esquerda,
 .botao-direita {
-  flex: 1;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-  background-color: #007acc;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+    flex: 1;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: white;
+    background-color: var(--button-blue);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .botao-esquerda:hover,
 .botao-direita:hover {
-  background-color: #005fa3;
+    background-color: var(--button-blue-hover);
+    transform: translateY(-2px);
 }
 
-/* Modal para visualização ampliada */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  padding-top: 60px;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.85);
+/* --- Conteúdo Principal (Main) --- */
+main {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease-out;
+    flex-grow: 1;
+    position: relative;
+    z-index: 1;
 }
 
-.modal-content {
-  margin: auto;
-  display: block;
-  max-width: 90%;
-  max-height: 80vh;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+/* --- Seções de Conteúdo (SPA) --- */
+.conteudo {
+    display: none;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    animation: fadeIn 0.8s ease-out;
 }
 
-.modal-close {
-  position: absolute;
-  top: 30px;
-  right: 35px;
-  color: white;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
+.conteudo.active {
+    display: block;
 }
 
-.fade-target {
-  transition: opacity 1s ease;
-  opacity: 1;
+.conteudo h2 {
+    font-size: 2.5em;
+    color: var(--primary-medium);
+    margin-bottom: 20px;
+    border-bottom: var(--border-bottom-light);
+    padding-bottom: 10px;
+    transition: border-bottom 0.3s ease;
 }
 
-.fade-in {
-  opacity: 0;
+
+
+.conteudo p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: var(--body-text-color-light);
+     max-width: 1200px;
+    /* Remova a linha 'max-width: 700px;' daqui se ainda estiver */
+    margin: 0 auto; /* Corrigi para '0 auto' para centralizar */
+    padding: 0 20px;
+    text-align: justify;
 }
 
-/* Rodapé com as mesmas cores do cabeçalho */
+
+
+    /* Se você quiser que o último parágrafo de #Inicio também estique, adicione: */
+    #Inicio p:last-of-type {
+        max-width: 1200px; /* Mesma largura ou ajuste conforme necessário */
+        padding: 0 40px;
+    }
+
+#Inicio p:last-of-type {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.conteudo a {
+    color: var(--button-blue);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.conteudo a:hover {
+    color: var(--button-blue-hover);
+    text-decoration: underline;
+}
+
+/* --- Rodapé --- */
 footer {
-  background: linear-gradient(135deg, #002244 0%, #004488 50%, #0077cc 100%);
-  color: white;
-  padding: 15px 20px;
-  text-align: center;
-  margin-top: 50px;
-  border-radius: 25px 25px 0 0;
-  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.15);
-  position: relative;
-  z-index: 10;
+    background: var(--footer-background-light);
+    color: var(--footer-text-color-light);
+    padding: 20px 40px;
+    text-align: center;
+    border-radius: 25px 25px 0 0;
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 10;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease-out;
+    flex-shrink: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.footer-links {
+    margin-top: 10px;
+    font-size: 0.9em;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-links a {
+    color: var(--footer-text-color-light);
+    text-decoration: none;
+    margin: 0 8px;
+    transition: text-decoration 0.3s ease;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+footer p {
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Animação de Fade-in --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Efeitos de Estrelas Cadentes (Globais e na Barra Superior) --- */
+
+.global-star-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 9999;
+}
+
+:root.dark-theme .global-star-background {
+    opacity: 1;
+}
+
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: global-star-fall linear forwards;
+}
+
+@keyframes global-star-fall {
+    0% {
+        transform: translate(var(--start-x), var(--start-y)) rotate(-45deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--end-x), var(--end-y)) rotate(-45deg);
+        opacity: 0;
+    }
+}
+
+.star.small {
+    width: 2px;
+    height: 2px;
+}
+
+.star.medium {
+    width: 3px;
+    height: 3px;
+}
+
+.star.large {
+    width: 4px;
+    height: 4px;
+}
+
+.header-main-title-desktop {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes fixed-star-fall {
+    0% {
+        transform: translate(0, 0) rotate(-45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-100px, 300px) rotate(-45deg);
+        opacity: 0;
+    }
+}
+
+
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.global-star-background .star {
+    animation: global-star-fall linear forwards;
+}
+
+.fixed-bar-stars .star-static {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.fixed-bar-stars .star-falling {
+    animation: fixed-star-fall linear forwards;
+    opacity: 0;
+}
+
+
+.star.small,
+.star-static.small,
+.star-falling.small {
+    width: 2px;
+    height: 2px;
+}
+
+.star.medium,
+.star-static.medium,
+.star-falling.medium {
+    width: 3px;
+    height: 3px;
+}
+
+.star.large,
+.star-static.large,
+.star-falling.large {
+    width: 4px;
+    height: 4px;
+}
+
+
+/* Estilos para a seção #Inicio (sem container visual) */
+#Inicio {
+    text-align: center;
+    padding: 40px 0;
+}
+
+#Inicio h2 {
+    display: none;
+}
+
+#Inicio>p:first-of-type {
+    display: none;
+}
+
+/* --- Galeria de Imagens --- */
+.galeria-imagens {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px auto;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.item-imagem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden; /* Essencial para esconder o figcaption inicialmente */
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    /* Por padrão (para desktop antes da media query de 1280px), ajusta a duas colunas */
+    width: calc(50% - 25px); /* Calcula largura para 2 colunas com 30px de gap */
+    height: 0; /* Necessário para o padding-bottom funcionar como proporção */
+    padding-bottom: calc(100% * 800 / 1280); /* Proporção 1280x800 -> 16:10 */
+    min-width: 300px; /* Evita que as imagens fiquem muito pequenas em telas desktop intermediárias */
+}
+
+.item-imagem:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.item-imagem img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Subtítulo flutuante (overlay) - DESKTOP E MOBILE */
+.item-imagem figcaption {
+    position: absolute; /* MANTIDO: Essencial para o comportamento de overlay */
+    bottom: 0; /* MANTIDO: Posiciona na parte inferior */
+    left: 0;
+    width: 100%;
+    background: var(--caption-overlay-background);
+    color: var(--caption-overlay-text);
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: bold;
+    transform: translateY(100%); /* MANTIDO: Escondido abaixo por padrão */
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    z-index: 2;
+}
+
+.item-imagem:hover figcaption,
+.item-imagem:focus figcaption {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* --- Media Query para Desktop (a partir de 1280px de largura) --- */
+@media (min-width: 1280px) {
+    .galeria-imagens {
+        max-width: 1280px; /* Limita a largura máxima da galeria inteira para 1280px */
+        padding: 0; /* Remove padding lateral extra para telas muito grandes */
+    }
+
+    .item-imagem {
+        width: 625px; /* Define uma largura fixa para cada imagem */
+        max-width: 625px; /* Garante que não ultrapasse a largura definida */
+        min-width: unset; /* Remove o min-width anterior */
+        height: 0; /* Essencial para o padding-bottom funcionar como proporção */
+        padding-bottom: calc(625px * 800 / 1280); /* Altura calculada para 16:10 */
+        border-radius: 8px; /* Mantém o border-radius para desktop */
+    }
+
+    .item-imagem figcaption {
+        font-size: 1.1em; /* Tamanho da fonte para desktop */
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+}
+
+
+/* --- Responsividade para telas menores que 1280px (Tablet e Mobile) --- */
+@media (max-width: 1279px) {
+    /* Header em Mobile */
+    header {
+        padding: 0;
+        align-items: stretch;
+        box-shadow: none;
+    }
+
+    .top-header-bar {
+        padding: 15px 20px;
+        /* Adiciona display flex e justify-content para alinhar elementos */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .main-header-content {
+        padding: 25px 20px 40px;
+        padding-top: 60px;
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .header-main-title-mobile {
+        display: block; /* Mostra o título mobile */
+        font-size: 1.5em;
+        text-align: left;
+        flex-grow: 1;
+        white-space: normal;
+        margin: 0;
+        padding: 0;
+    }
+
+    .header-main-title-desktop {
+        display: none; /* Esconde o título desktop */
+    }
+
+    .hamburger-menu {
+        display: block; /* Mostra o menu de hambúrguer */
+        margin-left: auto; /* Empurra para a direita */
+        order: 3; /* Garante a ordem correta na top-header-bar */
+    }
+
+    .theme-toggle {
+        display: block;
+        order: 1; /* Garante a ordem correta na top-header-bar */
+        margin-left: 0;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
+
+    /* Navbar (Menu Off-Canvas para Mobile) */
+    .navbar {
+        position: fixed;
+        top: 0;
+        right: -300px; /* Esconde o menu fora da tela */
+        width: 300px;
+        height: 100%;
+        background-color: var(--primary-dark);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        transition: right 0.3s ease-out; /* Transição para abrir/fechar */
+        z-index: 1001; /* Fica acima de outros elementos */
+        display: flex;
+        flex-direction: column;
+        padding-top: 0;
+        margin-left: 0;
+        order: 2;
+    }
+
+    .navbar.open {
+        right: 0; /* Mostra o menu quando a classe 'open' é adicionada */
+    }
+
+    .menu-header {
+        display: flex; /* Mostra o cabeçalho do menu off-canvas */
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background-color: var(--primary-medium);
+        color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        min-height: 60px;
+    }
+
+    .close-menu {
+        background: none;
+        border: none;
+        font-size: 1.5em;
+        color: white;
+        cursor: pointer;
+        padding: 5px;
+        transition: opacity 0.2s ease;
+    }
+
+    .close-menu:hover {
+        opacity: 0.7;
+    }
+
+    .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 20px 0;
+        flex-grow: 1;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .navbar li {
+        width: 100%;
+    }
+
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        padding: 15px 20px;
+        display: block;
+        transition: background-color 0.2s ease;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar li:last-child a {
+        border-bottom: none;
+    }
+
+    /* Efeito de empurrar o conteúdo quando o menu abre */
+    body.menu-open main,
+    body.menu-open footer {
+        transform: translateX(-300px);
+        transition: transform 0.3s ease-out;
+    }
+
+    body.menu-open {
+        overflow: hidden; /* Evita scroll na tela principal quando o menu está aberto */
+    }
+
+    .botao-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .botao-esquerda,
+    .botao-direita {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+
+    main {
+        padding: 0;
+        margin: 0;
+    }
+
+    .conteudo {
+        padding: 20px 0;
+    }
+
+    .conteudo h2 {
+        font-size: 1.8em;
+    }
+
+    .conteudo p {
+        font-size: 1em;
+        padding: 0 15px;
+        max-width: 100%;
+    }
+
+    #Inicio p:last-of-type {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    footer {
+        padding: 15px 20px;
+    }
+
+    /* Galeria de Imagens - AJUSTES PARA MOBILE */
+    .galeria-imagens {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+        margin: 30px auto;
+        padding: 0 15px;
+    }
+
+    .item-imagem {
+        width: 95%; /* Ocupa 95% da largura disponível */
+        max-width: none; /* Remove qualquer max-width anterior */
+        min-width: unset;
+        height: 0; /* Volta a usar padding-bottom para proporção em mobile */
+        padding-bottom: calc(95% * 800 / 1280); /* Proporção 16:10 para mobile */
+        border-radius: 5px; /* Ajusta o border-radius para mobile */
+    }
+
+    .item-imagem img {
+        height: 100%;
+        border-radius: 5px;
+    }
+
+    /* Garante que o figcaption se comporte como overlay em mobile também */
+    .item-imagem figcaption {
+        font-size: 1em; /* Ajuste o tamanho da fonte para mobile */
+        border-bottom-left-radius: 5px; /* Ajusta o border-radius para mobile */
+        border-bottom-right-radius: 5px; /* Ajusta o border-radius para mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .top-header-bar {
+        padding: 10px 15px;
+    }
+
+    .main-header-content {
+        padding: 20px 15px 30px;
+        padding-top: 50px;
+    }
+
+    .header-main-title-mobile {
+        font-size: 1.2em;
+    }
+
+    .main-header-content p {
+        font-size: 0.9em;
+    }
+
+    .botao-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .botao-esquerda,
+    .botao-direita {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    main {
+        padding: 0;
+        margin: 0;
+    }
+
+    .conteudo h2 {
+        font-size: 1.5em;
+    }
+
+    .conteudo p {
+        font-size: 1em;
+        padding: 0 10px;
+        max-width: 100%;
+    }
+
+    #Inicio p:last-of-type {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    footer {
+        padding: 10px 15px;
+    }
+
+    /* Galeria de Imagens - AJUSTES PARA TELAS MUITO PEQUENAS */
+    .galeria-imagens {
+        gap: 20px;
+        padding: 0 10px;
+    }
+
+    .item-imagem {
+        width: 100%;
+        height: 0; /* Continua usando padding-bottom para proporção */
+        padding-bottom: calc(100% * 800 / 1280); /* Proporção 16:10 */
+    }
+
+    .item-imagem img {
+        height: 100%;
+    }
+
+    /* Garante que o figcaption se comporte como overlay em mobile pequeno também */
+    .item-imagem figcaption {
+        font-size: 0.9em; /* Talvez um pouco menor para telas muito pequenas */
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+}
+
+
+
+
+.item-imagem img {
+    position: absolute; /* Posição absoluta para preencher a div pai */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ocupa 100% da largura do contêiner */
+    height: 100%; /* Ocupa 100% da altura do contêiner */
+    object-fit: contain; /* <--- ESSENCIAL: Redimensiona a imagem para caber na caixa, sem cortar */
+    /* Se você usar 'cover', a imagem pode ser cortada para preencher a caixa. 'contain' mostra ela inteira. */
+    display: block; /* Remove espaço extra que pode ser adicionado por alguns navegadores */
+}
+
+/* --- Variáveis de Tema (manter no seu CSS principal :root) --- */
+:root {
+    /* Cores padrão (tema claro) */
+    --primary-dark: #002244;
+    --primary-medium: #004488;
+    --primary-light: #0077cc;
+    --button-blue: #007acc;
+    --button-blue-hover: #005fa3;
+
+    /* Variáveis de tema claro */
+    --background-light: linear-gradient(to bottom, #d3d3e0, #c4cadb);
+    --text-color-light: #333;
+    --background-header-light: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--primary-light) 100%);
+    --text-color-header-light: white;
+    --background-main-light: white;
+    --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --border-bottom-light: 2px solid #eee;
+    --footer-background-light: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--primary-light) 100%);
+    --footer-text-color-light: white;
+    --body-text-color-light: #333;
+
+    /* Variáveis de tema claro para formulários */
+    --form-bg-color: #f7f7f7;
+    --card-bg-color: white;
+    --card-border-color: #e0e0e0;
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --heading-color: var(--primary-dark);
+    --input-border-color: #ccc;
+    --input-bg-color: white;
+    --input-text-color: #333;
+    --input-placeholder-color: #888;
+    --link-color: var(--button-blue);
+    --link-hover-color: var(--button-blue-hover);
+    --code-bg-color: #f0f0f0;
+    --code-text-color: #555;
+    --radio-label-color: #555;
+    --focus-outline-color: rgba(0, 119, 204, 0.4);
+
+    /* Cores para o título do XPath */
+    --xpath-title-color: #555;
+}
+/* --- Variáveis de Tema (manter no seu CSS principal :root) --- */
+:root {
+    /* Cores padrão (tema claro) */
+    --primary-dark: #002244;
+    --primary-medium: #004488;
+    --primary-light: #0077cc;
+    --button-blue: #007acc;
+    --button-blue-hover: #005fa3;
+
+    /* Variáveis de tema claro */
+    --background-light: linear-gradient(to bottom, #d3d3e0, #c4cadb);
+    --text-color-light: #333;
+    --background-header-light: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--primary-light) 100%);
+    --text-color-header-light: white;
+    --background-main-light: white;
+    --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --border-bottom-light: 2px solid #eee;
+    --footer-background-light: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--primary-light) 100%);
+    --footer-text-color-light: white;
+    --body-text-color-light: #333;
+
+    /* Variáveis de tema claro para formulários */
+    --form-bg-color: #f7f7f7;
+    --card-bg-color: white;
+    --card-border-color: #e0e0e0;
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --heading-color: var(--primary-dark);
+    --input-border-color: #ccc;
+    --input-bg-color: white;
+    --input-text-color: #333;
+    --input-placeholder-color: #888;
+    --link-color: var(--button-blue);
+    --link-hover-color: var(--button-blue-hover);
+    --code-bg-color: #f0f0f0;
+    --code-text-color: #555;
+    --radio-label-color: #555;
+    --focus-outline-color: rgba(0, 119, 204, 0.4);
+
+    /* Cores para o título do XPath */
+    --xpath-title-color: #555;
+
+    /* Novas Variáveis de Tema */
+    --success-color: #28a745; /* Cor para mensagem de sucesso (claro) */
+    --error-color: #dc3545; /* Cor para mensagem de erro (claro) */
+    --button-red: #dc3545; /* Para feedback de erro em input (claro) */
+}
+
+/* Tema escuro */
+:root.dark-theme {
+    --background-light: #1a1a2e;
+    --text-color-light: #e0e0e0;
+    --background-header-light: linear-gradient(135deg, #0f0f1d 0%, #1e1e3f 50%, #2a2a50 100%);
+    --text-color-header-light: #e0e0e0;
+    --background-main-light: #282840;
+    --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.5);
+    --border-bottom-light: #555;
+    --footer-background-light: linear-gradient(135deg, #0f0f1d 0%, #1e1e3f 50%, #2a2a50 100%);
+    --footer-text-color-light: #e0e0e0;
+    --button-blue: #6a9bd8;
+    --button-blue-hover: #4e7db8;
+    --body-text-color-light: #e0e0e0;
+
+    /* Variáveis de tema escuro para formulários */
+    --form-bg-color: #20203a;
+    --card-bg-color: #2e2e4e;
+    --card-border-color: #3a3a5a;
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    --heading-color: #e0e0e0;
+    --input-border-color: #555;
+    --input-bg-color: #3a3a5a;
+    --input-text-color: #e0e0e0;
+    --input-placeholder-color: #a0a0a0;
+    --link-color: var(--button-blue);
+    --link-hover-color: var(--button-blue-hover);
+    --code-bg-color: #1a1a2e;
+    --code-text-color: #a0a0a0;
+    --radio-label-color: #e0e0e0;
+    --focus-outline-color: rgba(106, 155, 216, 0.4);
+
+    /* Cores para o título do XPath */
+    --xpath-title-color: #a0a0a0;
+
+    /* Novas Variáveis de Tema */
+    --success-color: #2ecc71; /* Cor para mensagem de sucesso (escuro) */
+    --error-color: #e74c3c; /* Cor para mensagem de erro (escuro) */
+    --button-red: #e74c3c; /* Para feedback de erro em input (escuro) */
+}
+
+/* --- Seção de Teste (#teste) --- */
+#teste.conteudo {
+    padding: 60px 20px;
+    background-color: var(--form-bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* CENTRALIZA TODOS OS ITENS FILHOS DIRETOS (h2, p, form-test-group, button, message) */
+    max-width: 100vw;
+    margin: 0 auto;
+    transition: background-color 0.3s ease;
+}
+
+#teste h2 {
+    font-size: 2.8em;
+    color: var(--heading-color);
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--primary-light);
+    width: fit-content; /* Permite que o width se ajuste ao conteúdo */
+    margin-left: auto; /* Centraliza o bloco h2 */
+    margin-right: auto; /* Centraliza o bloco h2 */
+    text-align: center; /* Centraliza o texto do h2 */
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+#teste p {
+    max-width: 900px;
+    text-align: center; /* Centraliza o texto dos parágrafos */
+    margin-bottom: 25px;
+    line-height: 1.6;
+    font-size: 1.1em;
+    color: var(--body-text-color-light);
+    transition: color 0.3s ease;
+}
+
+#teste h3 {
+    font-size: 1.8em;
+    color: var(--heading-color);
+    margin-top: 40px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center; /* Centraliza o texto do h3 */
+    transition: color 0.3s ease;
+}
+
+/* --- Estilos para os Grupos de Formulário (form-test-group) --- */
+.form-test-group {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: var(--card-shadow);
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: center; /* Centraliza os dois blocos (input-and-label e xpath-container) quando lado a lado */
+    align-items: flex-start; /* Alinha o topo dos blocos */
+    /* Removido text-align: left; daqui para permitir que o conteúdo interno seja centralizado se necessário */
+    transition: all 0.3s ease;
+}
+
+.form-test-group:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Contêiner para o input/label */
+.input-and-label {
+    flex: 1;
+    margin-right: 20px;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza labels e inputs dentro de input-and-label */
+}
+
+.form-test-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: var(--heading-color);
+    font-size: 1.1em;
+    text-align: center; /* Centraliza o texto do label */
+    transition: color 0.3s ease;
+}
+
+.form-test-group input[type="text"],
+.form-test-group input[type="email"],
+.form-test-group input[type="password"],
+.form-test-group select {
+    width: 90%; /* Ajuste a largura para centralizar melhor */
+    margin-left: auto; /* Centraliza o input/select */
+    margin-right: auto; /* Centraliza o input/select */
+    padding: 12px;
+    margin-bottom: 0;
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    background-color: var(--input-bg-color);
+    color: var(--input-text-color);
+    font-size: 1em;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    text-align: center; /* Centraliza o texto digitado */
+}
+
+.form-test-group input::placeholder {
+    color: var(--input-placeholder-color);
+    opacity: 1;
+    transition: color 0.3s ease;
+    text-align: center; /* Centraliza o placeholder */
+}
+
+.form-test-group input:focus,
+.form-test-group select:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 4px var(--focus-outline-color);
+    outline: none;
+}
+
+/* Contêiner para o XPath */
+.xpath-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o título e XPaths dentro do seu contêiner */
+    margin-left: 20px;
+    max-width: 50%;
+}
+
+.xpath-title {
+    font-weight: bold;
+    color: var(--xpath-title-color);
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    text-align: center; /* Centraliza o texto do título do XPath */
+    transition: color 0.3s ease;
+}
+
+.xpath-display {
+    background-color: var(--code-bg-color);
+    color: var(--code-text-color);
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    font-size: 0.85em;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    overflow-x: auto;
+    white-space: pre-wrap; /* Mudei para pre-wrap para quebra de linha com preservação de espaços */
+    word-wrap: break-word; /* Garante que palavras longas quebrem */
+    align-self: center; /* Centraliza o bloco do XPath */
+    max-width: 90%; /* Ajuste a largura para centralizar melhor */
+    margin-left: auto; /* Centraliza o bloco do XPath */
+    margin-right: auto; /* Centraliza o bloco do XPath */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    text-align: center; /* Centraliza o texto dentro do XPath display */
+}
+
+/* Estilos específicos para Links (dentro do layout lado a lado) */
+.form-test-group a {
+    display: block; /* Mude para block para poder centralizar com text-align ou margin:auto */
+    margin-top: 0;
+    margin-bottom: 0;
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    text-align: center; /* Centraliza o texto do link */
+    width: fit-content; /* Ajusta a largura ao conteúdo */
+    margin-left: auto; /* Centraliza o bloco do link */
+    margin-right: auto; /* Centraliza o bloco do link */
+}
+
+.form-test-group a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+/* Estilos específicos para Radio Buttons (mantendo a estrutura flex) */
+.form-test-group.radio-group {
+    flex-direction: row; /* Mantém lado a lado em desktop */
+    justify-content: center; /* Centraliza o grupo de radios */
+    align-items: center; /* Alinha o centro (horizontal) dos radios */
+}
+
+.form-test-group.radio-group .input-and-label {
+    flex-direction: column;
+    margin-right: 20px;
+    align-items: center; /* Centraliza a pergunta e os radios */
+}
+
+.form-test-group.radio-group .input-and-label p {
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center; /* Centraliza o texto de pergunta */
+    padding: 0;
+    max-width: none;
+    color: var(--heading-color);
+    font-size: 1.1em;
+}
+
+.form-test-group.radio-group .input-and-label label {
+    display: flex; /* Mantém flex para input e texto do label */
+    align-items: center; /* Alinha o checkbox/radio e o texto */
+    justify-content: center; /* Tenta centralizar o label inteiro */
+    margin-bottom: 10px;
+    font-weight: normal;
+    font-size: 1em;
+    color: var(--radio-label-color);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    width: 100%; /* Permite que o justify-content funcione */
+}
+
+.form-test-group.radio-group .input-and-label input[type="radio"] {
+    margin-right: 10px;
+    margin-bottom: 0;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    flex-shrink: 0;
+    border: 2px solid var(--input-border-color);
+    appearance: none;
+    border-radius: 50%;
+    position: relative;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.form-test-group.radio-group .input-and-label input[type="radio"]:checked {
+    background-color: var(--primary-light);
+    border-color: var(--primary-light);
+}
+
+.form-test-group.radio-group .input-and-label input[type="radio"]:checked::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-test-group.radio-group .input-and-label input[type="radio"]:focus {
+    box-shadow: 0 0 0 3px var(--focus-outline-color);
+    border-color: var(--primary-light);
+}
+
+
+/* --- Media Queries para Responsividade da Seção de Teste --- */
+
+@media (max-width: 992px) {
+    .form-test-group {
+        flex-direction: column;
+        align-items: center; /* Centraliza os blocos (input-and-label e xpath-container) */
+    }
+
+    .input-and-label,
+    .xpath-container {
+        max-width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+        width: 100%;
+        align-items: center; /* CENTRALIZA OS ELEMENTOS DENTRO DE CADA BLOCO (label, input, xpath-title, xpath-display) */
+    }
+
+    .input-and-label {
+        margin-bottom: 20px;
+    }
+
+    .xpath-title {
+        margin-top: 15px;
+        align-self: center; /* Centraliza o título do XPath */
+    }
+
+    /* Centraliza o conteúdo interno de input-and-label e xpath-container quando empilhados */
+    .form-test-group label,
+    .form-test-group input,
+    .form-test-group select,
+    .form-test-group a {
+        text-align: center; /* Centraliza o texto de labels, inputs e links */
+        width: auto; /* Permite que o texto se ajuste ao conteúdo */
+    }
+
+    /* Ajusta para que o input e select possam centralizar */
+    .form-test-group input[type="text"],
+    .form-test-group input[type="email"],
+    .form-test-group input[type="password"],
+    .form-test-group select {
+        width: 90%; /* Ajusta a largura para não ficar muito grudado nas bordas ao centralizar */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .xpath-display {
+        text-align: center; /* Centraliza o texto do XPath */
+        width: 90%; /* Ajusta a largura para não ficar muito grudado nas bordas */
+        margin-left: auto;
+        margin-right: auto;
+        white-space: normal; /* Permite quebras de linha para XPaths longos em telas pequenas */
+        overflow-x: hidden; /* Esconde rolagem horizontal */
+    }
+}
+
+@media (max-width: 768px) {
+    #teste.conteudo {
+        padding: 40px 15px;
+    }
+
+    #teste h2 {
+        font-size: 2.2em;
+        margin-bottom: 25px;
+    }
+
+    #teste p {
+        font-size: 1em;
+        margin-bottom: 20px;
+    }
+
+    #teste h3 {
+        font-size: 1.6em;
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+
+    .form-test-group {
+        padding: 20px;
+        margin-bottom: 15px;
+        max-width: 95%;
+    }
+
+    .form-test-group label {
+        font-size: 1em;
+        margin-bottom: 8px;
+    }
+
+    .form-test-group input[type="text"],
+    .form-test-group input[type="email"],
+    .form-test-group input[type="password"],
+    .form-test-group select {
+        padding: 10px;
+        font-size: 0.95em;
+    }
+
+    .form-test-group.radio-group .input-and-label label {
+        font-size: 0.95em;
+    }
+
+    .xpath-display {
+        font-size: 0.8em;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #teste.conteudo {
+        padding: 30px 10px;
+    }
+
+    #teste h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    #teste p {
+        font-size: 0.9em;
+        margin-bottom: 15px;
+    }
+
+    #teste h3 {
+        font-size: 1.4em;
+        margin-top: 25px;
+        margin-bottom: 10px;
+    }
+
+    .form-test-group {
+        padding: 15px;
+        margin-bottom: 10px;
+        max-width: 100%;
+    }
+
+    .form-test-group label {
+        font-size: 0.9em;
+        margin-bottom: 5px;
+    }
+
+    .form-test-group input[type="text"],
+    .form-test-group input[type="email"],
+    .form-test-group input[type="password"],
+    .form-test-group select {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    .form-test-group.radio-group .input-and-label label {
+        font-size: 0.9em;
+    }
+
+    .xpath-display {
+        font-size: 0.75em;
+        padding: 6px 10px;
+    }
+}
+
+/* --- Estilos para o Botão Registrar-se --- */
+.register-button {
+    background-color: var(--button-blue);
+    color: var(--text-color-header-light);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--box-shadow-light);
+    align-self: center; /* JÁ ESTÁ CENTRALIZADO */
+}
+
+.register-button:hover {
+    background-color: var(--button-blue-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.register-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Estilos para a Mensagem de Registro --- */
+.registration-success-message {
+    font-size: 1.2em;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center; /* CENTRALIZA O TEXTO DA MENSAGEM */
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    width: 100%;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    align-self: center; /* JÁ ESTÁ CENTRALIZADO */
 }
