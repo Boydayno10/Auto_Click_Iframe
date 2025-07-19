@@ -59,18 +59,14 @@ const mainHeaderContent = document.querySelector('.main-header-content'); // Sel
 // ...
 
 if (mainHeaderContent) {
-    if (targetSectionId === 'Inicio') {
-        // Se for a seção 'Inicio', mostra o main-header-content
-        mainHeaderContent.style.opacity = '1';
-        mainHeaderContent.style.visibility = 'visible';
-        mainHeaderContent.style.pointerEvents = 'auto';
+    if (['baixar', 'teste', 'politicas'].includes(targetSectionId)) {
+        mainHeaderContent.style.display = 'none';
     } else {
-        // Para qualquer outra seção ('baixar', 'teste', 'politicas'), oculta o main-header-content
-        mainHeaderContent.style.opacity = '0';
-        mainHeaderContent.style.visibility = 'hidden';
-        mainHeaderContent.style.pointerEvents = 'none';
+        mainHeaderContent.style.display = 'block';
     }
 }
+
+
 
 
         if (mobileMenu.classList.contains('open')) {

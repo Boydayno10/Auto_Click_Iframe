@@ -652,12 +652,6 @@ footer p {
         align-items: center;
     }
 
-    .main-header-content {
-        padding: 25px 20px 40px;
-        padding-top: 60px;
-        text-align: center;
-        margin-top: 0;
-    }
 
     .header-main-title-mobile {
         display: block; /* Mostra o título mobile */
@@ -852,6 +846,7 @@ footer p {
 
     .main-header-content {
         padding: 20px 15px 30px;
+        transition: all 0.3s ease-in-out;
         padding-top: 50px;
     }
 
