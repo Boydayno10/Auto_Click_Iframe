@@ -88,12 +88,238 @@
             <p>O Auto Clicker & Form Helper é a resposta definitiva — uma extensão poderosa para o Chrome, desenvolvida para automatizar qualquer tipo de interação de clique e preenchimento de formulários de forma rápida, prática e intuitiva 🚀. Com ela, você economiza tempo e simplifica suas tarefas diárias na web.</p>
         </section>
 
-        <section id="baixar" class="conteudo">
-        </section>
+      <section id="baixar" class="conteudo">
+    <div class="config-header">
+        <div class="config-status">
+            <span class="status-label">Configuration</span>
+            <span class="status-disabled">Disabled</span>
+            <span class="status-message">Extension context invalidated</span>
+        </div>
+        <div class="config-actions-top">
+            <button class="icon-btn" title="Upload">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+            </button>
+            <button class="icon-btn" title="Download">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+            </button>
+        </div>
+    </div>
 
+    <div class="config-content">
+        <div class="config-sidebar">
+            <div class="sidebar-header">
+                <button class="btn-new-config">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    New Config
+                </button>
+                <div class="search-box">
+                    <input type="text" placeholder="Search">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+                <button class="icon-btn more-options" title="More Options">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="1"></circle>
+                        <circle cx="12" cy="5" r="1"></circle>
+                        <circle cx="12" cy="19" r="1"></circle>
+                    </svg>
+                </button>
+            </div>
+            <div class="config-list">
+                <div class="config-list-item active">
+                    <div class="item-info">
+                        <span class="item-name">Sample Config | Iframe</span>
+                        <span class="item-url">https://test.getautoclicker.com/</span>
+                    </div>
+                    <button class="item-options" title="Options">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="1"></circle>
+                            <circle cx="12" cy="5" r="1"></circle>
+                            <circle cx="12" cy="19" r="1"></circle>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="config-details">
+            <div class="details-header">
+                <div class="config-name-input">
+                    <label for="configName">Name</label>
+                    <input type="text" id="configName" value="Sample Config | Iframe">
+                </div>
+                <div class="config-url-input">
+                    <label for="configUrl">URL <span class="required">*</span></label>
+                    <input type="url" id="configUrl" value="https://test.getautoclicker.com/">
+                </div>
+                <div class="config-init-wait-input">
+                    <label for="initWait">Init Wait (sec)</label>
+                    <input type="number" id="initWait" value="0" min="0">
+                </div>
+                <div class="config-toggle-enable">
+                    <span class="toggle-label">Enable</span>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="action-section">
+                <div class="action-header">
+                    <span class="action-title">Action</span>
+                    <span class="action-status-message">Extension context invalidated</span>
+                    <div class="action-buttons-group">
+                        <button class="btn-batch">Batch</button>
+                        <button class="btn-add-action">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Add Action
+                        </button>
+                    </div>
+                </div>
+
+                <div class="action-list-headers">
+                    <div class="header-item header-num">#</div>
+                    <div class="header-item header-name">Name</div>
+                    <div class="header-item header-element-finder">Element Finder
+                        <span class="info-icon" title="Informação sobre Element Finder">i</span>
+                    </div>
+                    <div class="header-item header-interval-ms">Intervalo MS
+                        <span class="info-icon" title="Tempo de espera em milissegundos antes da ação">i</span>
+                    </div>
+                    <div class="header-item header-value">Value
+                        <span class="info-icon" title="Informação sobre Valor">i</span>
+                    </div>
+                    <div class="header-item header-repeat">Repeat</div>
+                    <div class="header-item header-actions"></div>
+                </div>
+
+                <div id="xpath-actions-container" class="xpath-actions-table">
+                    <div class="xpath-action-row">
+                        <div class="col col-num">1</div>
+                        <div class="col col-name"><input type="text" class="input-inline" value="Fill Name"></div>
+                        <div class="col col-element-finder"><input type="text" class="input-inline" value="//form/input[@id='name']"></div>
+                        <div class="col col-interval-ms"><input type="number" class="input-inline" value="500" min="0"></div>
+                        <div class="col col-value"><input type="text" class="input-inline" value="Name Value"></div>
+                        <div class="col col-repeat"><input type="number" class="input-inline" value="1" min="1"></div>
+                        <div class="col col-actions">
+                            <button class="action-icon-btn edit-btn" title="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></button>
+                            <button class="action-icon-btn delete-btn" title="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path></svg></button>
+                        </div>
+                    </div>
+                    <div class="xpath-action-row">
+                        <div class="col col-num">2</div>
+                        <div class="col col-name"><input type="text" class="input-inline" value="Fill Email"></div>
+                        <div class="col col-element-finder"><input type="text" class="input-inline" value="//form/input[@id='mail']"></div>
+                        <div class="col col-interval-ms"><input type="number" class="input-inline" value="200" min="0"></div>
+                        <div class="col col-value"><input type="text" class="input-inline" value="test@gmail.com"></div>
+                        <div class="col col-repeat"><input type="number" class="input-inline" value="1" min="1"></div>
+                        <div class="col col-actions">
+                            <button class="action-icon-btn edit-btn" title="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></button>
+                            <button class="action-icon-btn delete-btn" title="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path></svg></button>
+                        </div>
+                    </div>
+                    <div class="xpath-action-row">
+                        <div class="col col-num">3</div>
+                        <div class="col col-name"><input type="text" class="input-inline" value="Fill Message"></div>
+                        <div class="col col-element-finder"><input type="text" class="input-inline" value="//form/textarea[@id='msg']"></div>
+                        <div class="col col-interval-ms"><input type="number" class="input-inline" value="100" min="0"></div>
+                        <div class="col col-value"><input type="text" class="input-inline" value="I'm Here"></div>
+                        <div class="col col-repeat"><input type="number" class="input-inline" value="1" min="1"></div>
+                        <div class="col col-actions">
+                            <button class="action-icon-btn edit-btn" title="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></button>
+                            <button class="action-icon-btn delete-btn" title="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path></svg></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="actionConfigModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Configurar e preencher a Ação</h3>
+            <div class="modal-header-icons">
+                <button class="icon-btn" title="Edit Action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></button>
+                <button class="icon-btn" title="Duplicate Action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg></button>
+            </div>
+        </div>
+        <div class="modal-body">
+            <p class="modal-description">Configure os detalhes da ação aqui. Você pode usar XPath para identificar o elemento e definir o valor a ser preenchido, o intervalo e o número de repetições.</p>
+
+            <div class="input-group-modal">
+                <label for="modalActionName">Nome da Ação</label>
+                <input type="text" id="modalActionName" placeholder="Ex: Preencher Usuário">
+            </div>
+
+            <div class="input-group-modal">
+                <label for="modalXPathInput">XPath do Elemento</label>
+                <input type="text" id="modalXPathInput" placeholder="Ex: //input[@id='username']">
+            </div>
+
+            <div class="input-group-modal">
+                <label for="modalValueInput">Valor a Preencher</label>
+                <input type="text" id="modalValueInput" placeholder="Ex: meu_usuario">
+            </div>
+
+            <div class="modal-options modal-row">
+                <div class="input-group-modal small-input">
+                    <label for="modalIntervalMs">Intervalo (ms)</label>
+                    <input type="number" id="modalIntervalMs" value="100" min="0">
+                </div>
+                <div class="input-group-modal small-input">
+                    <label for="modalRepeatCount">Repetições</label>
+                    <input type="number" id="modalRepeatCount" value="1" min="1">
+                </div>
+                <div class="radio-group">
+                    <input type="radio" id="pasteOption" name="fillMethod" value="paste" checked>
+                    <label for="pasteOption">Paste</label>
+                    <input type="radio" id="typeOption" name="fillMethod" value="type">
+                    <label for="typeOption">Type</label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary btn-save-modal">Salvar</button>
+            <button class="btn btn-danger btn-cancel-modal">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<template id="xpath-action-template">
+    <div class="xpath-action-row">
+        <div class="col col-num"></div>
+        <div class="col col-name"><input type="text" class="input-inline" placeholder="Nome da Ação"></div>
+        <div class="col col-element-finder"><input type="text" class="input-inline" placeholder="XPath"></div>
+        <div class="col col-interval-ms"><input type="number" class="input-inline" value="100" min="0"></div>
+        <div class="col col-value"><input type="text" class="input-inline" placeholder="Valor"></div>
+        <div class="col col-repeat"><input type="number" class="input-inline" value="1" min="1"></div>
+        <div class="col col-actions">
+            <button class="action-icon-btn edit-btn" title="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></button>
+            <button class="action-icon-btn delete-btn" title="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path></svg></button>
+        </div>
+    </div>
+</template>
 
         <section id="teste" class="conteudo">
-            <p>Esta seção é um ambiente de demonstração para que você possa testar a funcionalidade de preenchimento e clique da extensão "Auto Clicker & Form Helper" usando XPaths. Abaixo, você encontrará diversos tipos de campos de formulário com seus respectivos XPaths.</p>
             <p>Você pode usar a extensão para preencher esses campos e ver como a automação funciona na prática. Lembre-se que a extensão localiza e preenche inputs baseando-se nesses XPaths.</p>
 
             <div class="form-test-group">
@@ -231,8 +457,8 @@
 
 
         <section id="politicas" class="conteudo">
-            <p>Esta Política de Privacidade descreve como a extensão "Auto Clicker & Form Helper" (doravante referida como "a Extensão") gerencia as informações dos usuários.</p>
-
+            <p>.</p>
+      <p>.</p>
             <h3>1. Coleta e Uso de Dados:</h3>
             <p>A Extensão foi desenvolvida com foco na sua privacidade. Ela não coleta, armazena, monitora, transmite ou compartilha quaisquer dados pessoais identificáveis ou informações de navegação dos usuários com o desenvolvedor ou terceiros. Todas as configurações e dados inseridos pelo usuário (como XPaths, valores de preenchimento, intervalos e configurações de repetição) são armazenados exclusivamente de forma local no seu navegador (utilizando a API chrome.storage.local). Essas informações nunca são enviadas para servidores externos ou acessadas por outras entidades.</p>
 

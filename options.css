@@ -1,0 +1,59 @@
+/* options.css */
+
+/* Estilos específicos para a seção de configurações */
+#configuracoes {
+    /* Você pode adicionar estilos específicos para esta seção aqui */
+}
+
+.option-group {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid var(--border-color); /* Usando variável do style.css */
+    border-radius: 5px;
+    background-color: var(--background-color); /* Ou uma cor específica para grupos de opções */
+}
+
+.option-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-color); /* Usando variável do style.css */
+}
+
+.option-group input[type="number"],
+.option-group input[type="text"] {
+    width: calc(100% - 22px); /* Ajusta para padding e borda */
+    padding: 10px;
+    border: 1px solid var(--input-border-color); /* Usando variável do style.css */
+    border-radius: 4px;
+    background-color: var(--section-bg); /* Ou uma cor específica para inputs */
+    color: var(--text-color); /* Usando variável do style.css */
+}
+
+#save-options {
+    background-color: var(--button-bg); /* Usando variável do style.css */
+    color: var(--button-text); /* Usando variável do style.css */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+#save-options:hover {
+    background-color: var(--button-hover-bg); /* Usando variável do style.css */
+}
+
+#save-message {
+    font-weight: bold;
+    margin-top: 10px;
+    /* A cor é definida inline no HTML, mas você pode sobrescrever aqui se preferir */
+}
+
+/* Você pode adicionar mais estilos específicos para os elementos de teste aqui, se necessário. */
+/* Por exemplo: */
+.form-test-group .xpath-display {
+    /* Adicionar algo específico para o display do XPath no teste, se desejar */
+}
+

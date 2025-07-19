@@ -1513,3 +1513,1018 @@ footer p {
     transition: color 0.3s ease, background-color 0.3s ease;
     align-self: center; /* JÁ ESTÁ CENTRALIZADO */
 }
+
+
+
+
+
+
+
+
+/* Variáveis de Cores (Atualizadas para o tema escuro predominante) */
+:root {
+    --bg-dark: #1e1e2d; /* Fundo escuro principal */
+    --bg-dark-light: #2a2a3a; /* Fundo um pouco mais claro (para cards/elementos) */
+    --bg-card: #2f2f40; /* Fundo para cards e seções internas */
+    --bg-input: #3e3e50; /* Fundo para inputs */
+    --text-light: #e0e0e0; /* Cor do texto claro */
+    --text-medium: #a0a0b0; /* Cor do texto secundário */
+    --text-label: #b0b0c0; /* Cor para labels */
+    --primary-blue: #007bff; /* Azul primário para botões e destaques */
+    --primary-blue-hover: #0056b3;
+    --secondary-teal: #17a2b8; /* Azul teal para botões secundários */
+    --secondary-teal-hover: #138496;
+    --green-btn: #28a745; /* Botão verde */
+    --green-btn-hover: #218838;
+    --red-btn: #dc3545; /* Botão vermelho */
+    --red-btn-hover: #c82333;
+    --border-color-dark: #3e3e50; /* Cor da borda escura */
+    --border-color-light: #4c4c60; /* Cor da borda um pouco mais clara */
+    --shadow-dark: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para elementos escuros */
+    --font-family-sans: 'Roboto', sans-serif;
+    --font-family-mono: 'Fira Code', monospace;
+}
+
+/* Base Body Styles (mantido do anterior, certifique-se de que está no topo do CSS) */
+body {
+    font-family: var(--font-family-sans);
+    background-color: var(--bg-dark); /* Fundo escuro */
+    color: var(--text-light);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container { /* Usado na navbar */
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+
+
+/* Conteúdo das Seções (mantido do anterior) */
+.conteudo {
+    display: none;
+    padding: 40px 0;
+    min-height: calc(100vh - 80px);
+}
+
+.conteudo.active-section {
+    display: block;
+}
+
+
+/* --- Início: Estilos para a Seção "Início" (mantidos do anterior) --- */
+.hero-section {
+    text-align: center;
+    padding: 80px 20px 60px;
+    background: linear-gradient(135deg, var(--bg-dark), #151520);
+    border-radius: 15px;
+    margin-bottom: 50px;
+    box-shadow: var(--shadow-dark);
+}
+
+.hero-section h1 {
+    font-size: 3.5em;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+}
+
+.hero-section p {
+    font-size: 1.3em;
+    color: var(--text-medium);
+    max-width: 800px;
+    margin: 0 auto 40px;
+    line-height: 1.5;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 15px 35px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    color: white;
+    border: 2px solid var(--primary-blue);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-blue-hover);
+    border-color: var(--primary-blue-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--secondary-teal);
+    border: 2px solid var(--secondary-teal);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-teal);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+.preview-section {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.preview-section h3 {
+    font-size: 2.2em;
+    color: var(--text-light);
+    margin-bottom: 30px;
+    font-weight: 600;
+    position: relative;
+}
+
+.preview-section h3::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: var(--primary-blue);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+.preview-images {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.preview-image-large,
+.preview-image-small {
+    border-radius: 10px;
+    box-shadow: var(--shadow-dark);
+    border: 1px solid var(--border-color-dark); /* Usar border-color-dark */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.preview-image-large {
+    max-width: 65%;
+    height: auto;
+}
+
+.preview-image-small {
+    max-width: 30%;
+    height: auto;
+}
+
+.preview-image-large:hover,
+.preview-image-small:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.about-section {
+    background-color: var(--bg-dark-light);
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: var(--shadow-dark);
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-section p {
+    font-size: 1.1em;
+    color: var(--text-medium);
+    line-height: 1.7;
+}
+
+/* --- Seção de Configurações (#baixar) --- */
+#baixar {
+    padding: 0; /* Remove padding da seção principal, o padding será dos elementos internos */
+    background-color: var(--bg-dark); /* Usa o fundo escuro principal */
+    border-radius: 0; /* Remove border-radius */
+    box-shadow: none; /* Remove shadow */
+    width: 100%;
+    max-width: 100%; /* Ocupa a largura total */
+    margin: 0;
+    display: flex; /* Para centralizar o conteúdo da config */
+    justify-content: center;
+    align-items: flex-start; /* Alinha ao topo */
+    min-height: calc(100vh - 80px); /* Ocupa a altura restante da viewport */
+}
+
+/* Títulos gerais da seção Config, se ainda forem usados */
+#baixar h2, #baixar > p {
+    display: none; /* Esconde estes títulos, pois o design da imagem não os tem */
+}
+
+.config-header {
+    background-color: var(--bg-dark-light);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color-dark);
+    position: absolute; /* Posiciona no topo da área de conteúdo */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50; /* Garante que fique acima do conteúdo */
+}
+
+.config-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.status-label {
+    font-weight: 600;
+    color: var(--text-light);
+}
+.status-disabled {
+    background-color: #dc3545; /* Vermelho para Disabled */
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.status-message {
+    color: var(--text-medium);
+    font-size: 0.9em;
+}
+
+.config-actions-top {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+.icon-btn svg {
+    width: 20px;
+    height: 20px;
+    color: var(--text-medium);
+}
+.icon-btn:hover {
+    background-color: rgba(var(--primary-blue-rgb, 0, 123, 255), 0.2);
+}
+
+
+/* Conteúdo principal da configuração - Grid de duas colunas */
+.config-content {
+    display: flex; /* Usamos flexbox para a divisão lateral */
+    width: 100%;
+    max-width: 1400px; /* Adapta-se à largura da imagem */
+    margin-top: 50px; /* Espaço para o config-header */
+    height: calc(100vh - 80px - 50px); /* Altura total - navbar - header fixo */
+    border: 1px solid var(--border-color-dark); /* Borda em torno de todo o conteúdo */
+    border-top: none; /* Sem borda no topo, já tem no header */
+    overflow: hidden; /* Para garantir que o scroll esteja nas colunas */
+}
+
+/* Coluna Esquerda: Sidebar */
+.config-sidebar {
+    width: 280px; /* Largura fixa para a sidebar conforme a imagem */
+    background-color: var(--bg-dark-light);
+    border-right: 1px solid var(--border-color-dark);
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; /* Não permite encolher */
+    overflow-y: auto; /* Scroll para a lista de configs */
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 15px 15px; /* Padding inferior para separar da lista */
+    border-bottom: 1px solid var(--border-color-dark);
+    margin-bottom: 15px;
+}
+
+.btn-new-config {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.btn-new-config:hover {
+    background-color: var(--primary-blue-hover);
+}
+.btn-new-config svg {
+    width: 18px;
+    height: 18px;
+    color: white;
+}
+
+.search-box {
+    position: relative;
+    flex-grow: 1;
+}
+.search-box input {
+    width: 100%;
+    padding: 8px 10px 8px 30px; /* Padding para o ícone de busca */
+    border: 1px solid var(--border-color-dark);
+    border-radius: 5px;
+    background-color: var(--bg-input);
+    color: var(--text-light);
+    font-size: 0.9em;
+    box-sizing: border-box;
+}
+.search-box input::placeholder {
+    color: var(--text-medium);
+}
+.search-box svg {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: var(--text-medium);
+}
+
+.config-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color-dark); /* Linha divisória */
+    transition: background-color 0.2s ease;
+}
+.config-list-item:last-child {
+    border-bottom: none; /* Remove borda do último item */
+}
+.config-list-item:hover {
+    background-color: var(--bg-input); /* Cor de hover */
+}
+.config-list-item.active {
+    background-color: var(--primary-blue); /* Cor do item ativo */
+    color: white;
+}
+.config-list-item.active .item-url {
+    color: rgba(255, 255, 255, 0.8);
+}
+.config-list-item.active .item-options svg {
+    color: white;
+}
+
+.config-list-item .item-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+}
+.config-list-item .item-name {
+    font-weight: 500;
+    font-size: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.config-list-item .item-url {
+    font-size: 0.8em;
+    color: var(--text-medium);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.config-list-item .item-options {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+.config-list-item .item-options svg {
+    width: 18px;
+    height: 18px;
+    color: var(--text-medium);
+}
+.config-list-item .item-options:hover {
+    background-color: rgba(var(--primary-blue-rgb, 0, 123, 255), 0.2);
+}
+
+
+/* Coluna Direita: Detalhes da Configuração */
+.config-details {
+    flex-grow: 1; /* Ocupa o restante do espaço */
+    background-color: var(--bg-card); /* Fundo para a área de detalhes */
+    padding: 20px;
+    overflow-y: auto; /* Scroll para a área de detalhes se o conteúdo for muito longo */
+}
+
+.details-header {
+    display: flex;
+    align-items: flex-end; /* Alinha labels ao topo, inputs na linha de base */
+    gap: 20px; /* Espaço entre os grupos de input */
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color-dark); /* Linha divisória */
+}
+
+.config-name-input,
+.config-url-input,
+.config-init-wait-input {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Permite que cresçam */
+}
+
+.config-name-input label,
+.config-url-input label,
+.config-init-wait-input label {
+    color: var(--text-label);
+    font-size: 0.85em;
+    margin-bottom: 5px;
+}
+
+.config-name-input input,
+.config-url-input input,
+.config-init-wait-input input {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color-dark);
+    padding: 8px 12px;
+    border-radius: 5px;
+    color: var(--text-light);
+    font-size: 0.95em;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.config-name-input input:focus,
+.config-url-input input:focus,
+.config-init-wait-input input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.3);
+}
+
+.config-url-input .required {
+    color: var(--red-btn); /* Cor do asterisco vermelho */
+}
+
+.config-init-wait-input {
+    max-width: 100px; /* Largura fixa para o input de segundos */
+    flex-grow: 0; /* Não cresce */
+}
+
+.config-toggle-enable {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px; /* Espaço para o toggle */
+    flex-shrink: 0; /* Não encolhe */
+}
+.config-toggle-enable .toggle-label {
+    color: var(--text-label);
+    font-size: 0.85em;
+}
+
+/* Switch Toggle (Copiado e adaptado do design comum de toggle) */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--border-color-dark); /* Cor off */
+    transition: .4s;
+    border-radius: 22px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--text-light); /* Cor do "círculo" */
+    transition: .4s;
+    border-radius: 50%;
+}
+input:checked + .slider {
+    background-color: var(--green-btn); /* Cor on */
+}
+input:checked + .slider:before {
+    transform: translateX(18px);
+}
+
+
+/* Action Section (Lista de XPaths) */
+.action-section {
+    background-color: var(--bg-dark-light); /* Fundo da seção de ações */
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: var(--shadow-dark);
+}
+
+.action-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.action-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--text-light);
+}
+.action-status-message {
+    font-size: 0.85em;
+    color: var(--text-medium);
+    font-style: italic;
+}
+.action-buttons-group {
+    display: flex;
+    gap: 10px;
+}
+.btn-batch, .btn-add-action {
+    background-color: var(--primary-blue); /* Botões com azul */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.btn-batch {
+    background-color: var(--secondary-teal); /* Batch com azul teal */
+}
+.btn-batch:hover {
+    background-color: var(--secondary-teal-hover);
+}
+.btn-add-action:hover {
+    background-color: var(--primary-blue-hover);
+}
+.btn-add-action svg {
+    width: 16px;
+    height: 16px;
+    color: white;
+}
+
+/* Cabeçalhos da Tabela de XPaths */
+.action-list-headers {
+    /* Ajuste as colunas: num, name, element-finder, interval-ms, value, repeat, actions */
+    display: grid;
+    grid-template-columns: 30px 100px 2.5fr 80px 1.5fr 60px 80px; /* Adicionado 80px para Intervalo MS */
+    gap: 5px;
+    background-color: var(--bg-input); /* Fundo mais escuro para os cabeçalhos */
+    padding: 10px 5px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: var(--text-label);
+    border: 1px solid var(--border-color-dark);
+}
+
+.header-item {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+.header-item.header-num { text-align: center; justify-content: center; } /* Centraliza o # */
+.header-item.header-actions { justify-content: flex-end; } /* Alinha a direita */
+
+.info-icon {
+    background-color: var(--text-medium);
+    color: var(--bg-input);
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    font-size: 0.7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: help;
+}
+
+/* Linha de Ação XPath (corpo da tabela) */
+.xpath-actions-table {
+    margin-top: 10px;
+}
+.xpath-action-row {
+    /* Ajuste as colunas: num, name, element-finder, interval-ms, value, repeat, actions */
+    display: grid;
+    grid-template-columns: 30px 100px 2.5fr 80px 1.5fr 60px 80px; /* Mesmas colunas do cabeçalho */
+    gap: 5px;
+    background-color: var(--bg-dark); /* Fundo escuro para a linha */
+    padding: 8px 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    align-items: center;
+    border: 1px solid var(--border-color-dark);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.xpath-action-row:hover {
+    background-color: #262635; /* Um pouco mais claro no hover */
+    border-color: var(--primary-blue); /* Borda azul no hover */
+}
+
+.xpath-action-row .col {
+    color: var(--text-light);
+    font-size: 0.9em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 5px; /* Pequeno padding nas colunas */
+    /* Adicionado para centralizar conteúdo de colunas */
+    display: flex;
+    align-items: center;
+}
+.xpath-action-row .col-num {
+    text-align: center;
+    font-weight: bold;
+    color: var(--text-medium);
+    justify-content: center; /* Centraliza o número */
+}
+.xpath-action-row .col-element-finder,
+.xpath-action-row .col-value,
+.xpath-action-row .col-name {
+    font-family: var(--font-family-sans); /* Volta para a fonte sans-serif */
+    overflow: visible; /* Permite que o input não seja cortado */
+    white-space: normal; /* Permite quebra de linha dentro do input */
+}
+
+/* Estilo para os inputs inline dentro das colunas da tabela */
+.xpath-action-row .input-inline {
+    width: 100%;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color-dark);
+    padding: 4px 8px; /* Padding menor para inputs na linha */
+    border-radius: 4px;
+    color: var(--text-light);
+    font-size: 0.85em; /* Fonte um pouco menor para inputs inline */
+    outline: none;
+    box-sizing: border-box; /* Garante que padding não aumente a largura */
+    font-family: var(--font-family-mono); /* Mantém monospace para XPath/Value/Name */
+}
+.xpath-action-row .input-inline:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+/* Ajuste específico para o input de número na coluna repeat e interval-ms */
+.xpath-action-row .col-repeat input,
+.xpath-action-row .col-interval-ms input {
+    text-align: center; /* Centraliza o texto em inputs numéricos */
+}
+
+.xpath-action-row .col-actions {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+}
+.action-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+.action-icon-btn svg {
+    width: 18px;
+    height: 18px;
+    color: var(--text-medium);
+}
+.action-icon-btn:hover svg {
+    color: var(--primary-blue);
+}
+.action-icon-btn.delete-btn:hover svg {
+    color: var(--red-btn);
+}
+.action-icon-btn.edit-btn:hover svg {
+    color: var(--secondary-teal); /* Uma cor diferente para o edit */
+}
+
+
+/* MODAL DE CONFIGURAÇÃO DE AÇÃO */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 2000; /* Acima de todo o resto */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6); /* Overlay escuro */
+    display: flex; /* Usar flex para centralizar */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--bg-dark-light); /* Fundo da modal */
+    margin: auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    width: 90%;
+    max-width: 500px; /* Largura máxima da modal */
+    border: 1px solid var(--border-color-dark);
+    box-sizing: border-box; /* Para padding e border não aumentarem o tamanho */
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color-dark);
+}
+.modal-header h3 {
+    color: var(--text-light);
+    font-size: 1.5em;
+    margin: 0;
+}
+.modal-header-icons {
+    display: flex;
+    gap: 8px;
+}
+.modal-header-icons .icon-btn svg {
+    color: var(--text-medium);
+}
+.modal-header-icons .icon-btn:hover svg {
+    color: var(--primary-blue);
+}
+
+.modal-body {
+    margin-bottom: 25px;
+}
+.modal-description {
+    color: var(--text-medium);
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.input-group-modal {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.input-group-modal label {
+    color: var(--text-label);
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+.input-group-modal input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color-dark);
+    border-radius: 5px;
+    background-color: var(--bg-input);
+    color: var(--text-light);
+    font-size: 1em;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input-group-modal input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.3);
+}
+
+.modal-options {
+    display: flex;
+    flex-wrap: wrap; /* Permite quebra de linha para responsividade */
+    gap: 20px; /* Espaço entre os grupos de opções */
+    align-items: flex-end; /* Alinha labels ao topo, inputs na linha de base */
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color-dark);
+}
+.modal-options.modal-row { /* Nome mais claro para a nova classe */
+    justify-content: space-between; /* Espalha os itens */
+}
+
+.modal-options .small-input {
+    flex: 1; /* Permite que ocupem espaço igualmente */
+    min-width: 120px; /* Largura mínima para inputs menores */
+}
+
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px; /* Espaço do input acima */
+}
+.radio-group input[type="radio"] {
+    display: none; /* Esconde o radio button padrão */
+}
+.radio-group label {
+    position: relative;
+    padding-left: 25px; /* Espaço para o radio button customizado */
+    cursor: pointer;
+    color: var(--text-medium);
+    font-size: 0.95em;
+    margin-bottom: 0; /* Override do margin-bottom padrão */
+}
+.radio-group label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border-color-dark);
+    border-radius: 50%;
+    background-color: var(--bg-input);
+    transition: all 0.2s ease;
+}
+.radio-group input[type="radio"]:checked + label::before {
+    border-color: var(--primary-blue);
+    background-color: var(--primary-blue);
+}
+.radio-group label::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-light);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.radio-group input[type="radio"]:checked + label::after {
+    opacity: 1;
+}
+
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color-dark);
+}
+.modal-footer .btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    box-shadow: none; /* Remove shadow para botões de modal */
+}
+.modal-footer .btn-danger {
+    background-color: var(--red-btn);
+    color: white;
+    border: none;
+}
+.modal-footer .btn-danger:hover {
+    background-color: var(--red-btn-hover);
+}
+
+/* Responsividade (manter e ajustar conforme necessário) */
+@media (max-width: 768px) {
+    .config-content {
+        flex-direction: column;
+        height: auto; /* Permite que a altura se ajuste em telas menores */
+    }
+    .config-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color-dark);
+    }
+    .config-details {
+        padding: 15px;
+    }
+    .details-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    .config-name-input,
+    .config-url-input,
+    .config-init-wait-input {
+        max-width: 100%; /* Ocupa a largura total */
+    }
+    .config-toggle-enable {
+        margin-left: 0;
+        justify-content: flex-start;
+    }
+    .action-list-headers,
+    .xpath-action-row {
+        grid-template-columns: 30px 1fr 1fr 1fr 1fr 1fr 60px; /* Ajusta as colunas para caber melhor */
+        font-size: 0.8em;
+    }
+    .xpath-action-row .col-num {
+        padding: 0 2px;
+    }
+    .xpath-action-row .input-inline {
+        padding: 3px 6px;
+        font-size: 0.8em;
+    }
+    .xpath-action-row .col-actions {
+        gap: 2px;
+    }
+    .action-icon-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+    .modal-options.modal-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .config-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .config-actions-top {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .sidebar-header {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .btn-new-config {
+        width: 100%;
+        justify-content: center;
+    }
+    .search-box {
+        width: 100%;
+    }
+    .more-options {
+        margin-left: auto;
+    }
+    .action-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .action-buttons-group {
+        width: 100%;
+        justify-content: space-around;
+    }
+    .btn-batch, .btn-add-action {
+        flex-grow: 1;
+        justify-content: center;
+    }
+    .action-list-headers,
+    .xpath-action-row {
+        grid-template-columns: 30px 1fr 1fr 1fr 1fr 1fr 60px; /* Pode precisar de mais ajustes específicos */
+        font-size: 0.75em;
+    }
+}
