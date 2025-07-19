@@ -177,6 +177,42 @@ main {
     color: var(--text-color-header-light);
 }
 
+
+/* Assegure-se de que as seguintes regras estejam presentes para o funcionamento das animações de seção */
+.conteudo {
+    background-color: var(--section-bg);
+    padding: 0; /* Inicia sem padding para a animação */
+    margin-bottom: 0; /* Inicia sem margin para a animação */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: none; /* Inicia oculto */
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden; /* Oculta o conteúdo que excede o max-height */
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-out, padding 0.5s ease-out, margin 0.5s ease-out; 
+}
+
+.conteudo.active {
+    display: block; /* Torna visível para transição */
+    opacity: 1;
+    /* max-height será definido via JS para a altura real do conteúdo */
+    padding: 20px; /* Seu padding padrão */
+    margin-bottom: 40px; /* Seu margin-bottom padrão */
+}
+
+/* E também para o cabeçalho se você usa a animação de ocultar */
+.main-header-content {
+    /* ... seus estilos existentes ... */
+    opacity: 1; 
+    transition: margin-top 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.main-header-content.hidden-header-content {
+    margin-top: -200px; /* Ou o valor que oculte o conteúdo */
+    opacity: 0;
+    pointer-events: none;
+}
+
 /* Botão de Menu Hambúrguer (Três Pontos) */
 .hamburger-menu {
     display: none; /* Por padrão, escondido em desktop */
