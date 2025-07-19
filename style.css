@@ -122,46 +122,15 @@ header {
 }
 
 /* --- Conteúdo Principal do Cabeçalho (Não Fixo) --- */
-/* --- Conteúdo Principal do Cabeçalho (Não Fixo) --- */
 .main-header-content {
     text-align: center;
     padding: 0 20px 40px;
     padding-top: 100px;
     max-width: 960px;
     margin: 0 auto;
+       transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
     position: relative;
     z-index: 1;
-    /* Adicione estas linhas para a transição suave e controle de espaço */
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, height 0.5s ease-in-out, padding 0.5s ease-in-out;
-    opacity: 1; /* Padrão visível */
-    visibility: visible; /* Padrão visível */
-    pointer-events: auto; /* Padrão clicável */
-    height: auto; /* Altura automática quando visível */
-}
-
-/* Estado oculto para o main-header-content */
-.main-header-content.hidden-header-content { /* Nova classe para controlar o estado oculto */
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none; /* Desabilita cliques e interações quando oculto */
-    height: 0; /* Colapsa a altura para não ocupar espaço */
-    padding-top: 0; /* Remove padding superior quando oculto */
-    padding-bottom: 0; /* Remove padding inferior quando oculto */
-    margin-bottom: 0; /* Remove margem inferior para não empurrar o conteúdo */
-}
-
-/* Opcional: Ajuste para o padding-top do main se o header superior também for fixo e o main-header-content sumir */
-/* Se a seção "Inicio" ficar muito grudada no top-header-bar quando o main-header-content sumir,
-   você pode precisar ajustar o padding-top do #Inicio ou de main. */
-main {
-    padding-top: 0; /* Garante que não haja padding extra por padrão */
-}
-
-#Inicio {
-    /* Pode ser necessário ajustar o padding-top aqui se o top-header-bar fixo
-       estiver cobrindo o conteúdo de #Inicio quando o main-header-content está oculto.
-       Porém, a sua estrutura atual parece já ter isso em mente com o padding-top do main-header-content. */
-    padding-top: 40px; /* Seu valor original */
 }
 
 .header-main-title-mobile {
@@ -175,42 +144,6 @@ main {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     text-align: center;
     color: var(--text-color-header-light);
-}
-
-
-/* Assegure-se de que as seguintes regras estejam presentes para o funcionamento das animações de seção */
-.conteudo {
-    background-color: var(--section-bg);
-    padding: 0; /* Inicia sem padding para a animação */
-    margin-bottom: 0; /* Inicia sem margin para a animação */
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    display: none; /* Inicia oculto */
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden; /* Oculta o conteúdo que excede o max-height */
-    transition: max-height 0.5s ease-out, opacity 0.5s ease-out, padding 0.5s ease-out, margin 0.5s ease-out; 
-}
-
-.conteudo.active {
-    display: block; /* Torna visível para transição */
-    opacity: 1;
-    /* max-height será definido via JS para a altura real do conteúdo */
-    padding: 20px; /* Seu padding padrão */
-    margin-bottom: 40px; /* Seu margin-bottom padrão */
-}
-
-/* E também para o cabeçalho se você usa a animação de ocultar */
-.main-header-content {
-    /* ... seus estilos existentes ... */
-    opacity: 1; 
-    transition: margin-top 0.5s ease-out, opacity 0.5s ease-out;
-}
-
-.main-header-content.hidden-header-content {
-    margin-top: -200px; /* Ou o valor que oculte o conteúdo */
-    opacity: 0;
-    pointer-events: none;
 }
 
 /* Botão de Menu Hambúrguer (Três Pontos) */
