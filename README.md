@@ -1,113 +1,133 @@
-Auto Clicker - Form Helper
-Extensão para Chrome que automatiza cliques e preenchimento de formulários em sites.
+Auto Clicker – Form Helper
 
-⭐ Novidades na Versão 1.0.3
-Novas Funcionalidades:
-Editor de Scripts - Crie e edite scripts personalizados
+Chrome extension that automates clicks and form filling on websites.
 
-CSS Selectors - Use seletores CSS além de XPath
+⭐ What’s New in Version 1.0.3
+New Features:
 
-Múltiplas Configurações - Salve diferentes setups por site
+Script Editor – Create and edit custom scripts
 
-Sistema de Observação - Detecta elementos que aparecem dinamicamente
+CSS Selectors – Use CSS selectors in addition to XPath
 
-Configurações Avançadas - Modo iniciante/avançado
+Multiple Configurations – Save different setups per website
 
-Melhorias:
-Interface mais organizada
+Observation System – Detects dynamically appearing elements
 
-Feedback visual em tempo real
+Advanced Settings – Beginner/Advanced modes
 
-Blacklist de sites
+Improvements:
 
-Exportação/importação melhorada
+More organized interface
 
-🚀 Instalação
-Chrome Web Store: Link da extensão
+Real-time visual feedback
 
-Clique em "Adicionar ao Chrome"
+Website blacklist
 
-Fixe na barra de ferramentas para acesso rápido
+Improved export/import system
 
-💡 Como Usar
-Configuração Básica:
-Abra a extensão clicando no ícone
 
-Digite a URL da página a automatizar
 
-Defina tempo de espera inicial (opcional)
+🚀 Installation
 
-Adicione ações nos elementos
+Chrome Web Store: Extension link
+Click “Add to Chrome”
+Pin it to the toolbar for quick access
 
-Adicionando Ações:
-Método 1 - Automático:
 
-Clique direito no elemento → "Carregar Elemento"
 
-Escolha XPath ou CSS Selector
 
-O seletor é copiado automaticamente
+💡 How to Use
+Basic Setup:
 
-Método 2 - Manual:
+Open the extension by clicking its icon
 
-Clique em "+ Adicionar Ação"
+Enter the URL of the page you want to automate
 
-Cole o XPath ou CSS Selector
+Set an initial wait time (optional)
 
-Configure intervalo e repetições
+Add actions to the elements
 
-Tipos de Ação:
-Click - Clica no elemento
+Adding Actions:
+Method 1 – Automatic:
 
-Fill - Preenche campos de texto
+Right-click the element → “Load Element”
 
-Copy/Paste - Preenchimento instantâneo
+Choose XPath or CSS Selector
 
-Type - Digitação caracter por caracter
+The selector is copied automatically
 
-Configurações de Repetição:
-Número específico (ex: 5 vezes)
+Method 2 – Manual:
 
--2 - Loop infinito
+Click “+ Add Action”
 
-1 - Executa em todos elementos encontrados
+Paste the XPath or CSS Selector
 
-⚙️ Funcionalidades Principais
-Para Iniciantes:
-Interface simples e intuitiva
+Configure interval and repetitions
 
-Captura automática de elementos
+Action Types:
 
-Configurações pré-definidas
+Click – Clicks the element
 
-Para Avançados:
-Editor de Scripts - Código personalizado
+Fill – Fills text fields
 
-APIs de Injeção - Diferentes métodos de execução
+Copy/Paste – Instant field fill
 
-Modo Observação - Para elementos dinâmicos
+Type – Types character by character
 
-Sandbox Mode - Controle de ambiente
+Repetition Settings:
 
-Ferramentas de Gestão:
-Salvar/Exportar configurações
+Specific number (e.g., 5 times)
 
-Múltiplos perfis por site
+-2 – Infinite loop
 
-Blacklist - Bloqueio em sites específicos
+1 – Runs on all elements found
 
-Feedback visual - Status em tempo real
 
-🛠️ Configurações Avançadas
-Acesse através do ícone ⚙️:
 
-Modo de Configuração:
 
-Iniciante (recomendado)
+⚙️ Main Features
+For Beginners:
 
-Avançado (mais opções)
+Simple and intuitive interface
 
-API de Scripts:
+Automatic element capturing
+
+Predefined configurations
+
+For Advanced Users:
+
+Script Editor – Custom code
+
+Injection APIs – Multiple execution methods
+
+Observation Mode – Handles dynamic elements
+
+Sandbox Mode – Environment control
+
+Management Tools:
+
+Save/Export configurations
+
+Multiple profiles per site
+
+Blacklist – Block automation on chosen sites
+
+Visual feedback – Real-time status
+
+
+
+
+🛠️ Advanced Settings
+
+Access via the ⚙️ icon:
+
+Configuration Mode:
+
+Beginner (recommended)
+
+Advanced (more options)
+
+Script API Modes:
 
 Dynamic Injection
 
@@ -115,7 +135,7 @@ UserScripts API
 
 DOM Injection
 
-Modo Sandbox:
+Sandbox Mode:
 
 Default
 
@@ -123,24 +143,25 @@ Force DOM
 
 Isolated
 
-🔧 Exemplos de Seletores
+
+
+
+🔧 Selector Examples
 XPath:
-
 //button[@id='submit']
-
 //input[@type='email']
-
-//a[contains(text(),'Próximo')]
+//a[contains(text(),'Next')]
 
 CSS Selector:
-
 #username
-
 .submit-btn
-
 input[type="password"]
 
-📞 Suporte
+
+
+
+📞 Support
+
 Email: sdankhey848@gmail.com
 
-Site de Teste: https://autoclicker-formhelper.vercel.app/#teste
+Test Website: https://autoclicker-formhelper.vercel.app/#teste
