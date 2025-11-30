@@ -1,0 +1,2869 @@
+/* Garante que tudo respeite a largura da tela e não cause overflow */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    /* Essencial para o sticky footer */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--background-light);
+    /* Usando variável de tema */
+    color: var(--text-color-light);
+    /* Usando variável de tema */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100vw;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease-out;
+    touch-action: manipulation;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Cores Base (usadas para o menu também) --- */
+:root {
+    /* Cores padrão (tema claro) */
+    --primary-dark: #002244;
+    --primary-medium: #004488;
+    --primary-light: #0077cc;
+    --button-blue: #007acc;
+    --button-blue-hover: #005fa3;
+
+    /* Variáveis de tema claro */
+    --background-light: linear-gradient(to bottom, #d3d3e0, #c4cadb);
+    --text-color-light: #333;
+    --background-header-light: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--primary-light) 100%);
+    --text-color-header-light: white;
+    --background-main-light: white;
+    --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --border-bottom-light: 2px solid #eee;
+    --footer-background-light: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--primary-light) 100%);
+    --footer-text-color-light: white;
+    --image-caption-color-light: #333;
+    --body-text-color-light: #333;
+
+    /* Overlay para legenda flutuante (claro) */
+    --caption-overlay-background: rgba(255, 255, 255, 0.85);
+    --caption-overlay-text: #333;
+}
+
+/* Tema escuro */
+:root.dark-theme {
+    --background-light: #1a1a2e;
+    --text-color-light: #e0e0e0;
+    --background-header-light: linear-gradient(135deg, #0f0f1d 0%, #1e1e3f 50%, #2a2a50 100%);
+    --text-color-header-light: #e0e0e0;
+    --background-main-light: #282840;
+    --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.5);
+    --border-bottom-light: #555; /* Corrigido, era 2px solid #555 */
+    --footer-background-light: linear-gradient(135deg, #0f0f1d 0%, #1e1e3f 50%, #2a2a50 100%);
+    --footer-text-color-light: #e0e0e0;
+    --button-blue: #6a9bd8;
+    --button-blue-hover: #4e7db8;
+    --image-caption-color-light: #bbbbbb;
+    --body-text-color-light: #e0e0e0;
+
+    /* Overlay para legenda flutuante (escuro) */
+    --caption-overlay-background: rgba(0, 0, 0, 0.85);
+    --caption-overlay-text: #e0e0e0;
+}
+
+/* --- Cabeçalho Geral (Contêiner Pai) --- */
+header {
+    background: var(--background-header-light);
+    color: var(--text-color-header-light);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 10;
+    transition: background 0.3s ease, color 0.3s ease;
+    flex-shrink: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* --- BARRA SUPERIOR FIXA --- */
+.top-header-bar {
+    background: var(--background-header-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 15px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease;
+}
+
+.fixed-bar-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+:root.dark-theme .fixed-bar-stars {
+    opacity: 1;
+}
+
+/* --- Conteúdo Principal do Cabeçalho (Não Fixo) --- */
+.main-header-content {
+    text-align: center;
+    padding: 0 20px 40px;
+    padding-top: 100px;
+    max-width: 960px;
+    margin: 0 auto;
+       transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    position: relative;
+    z-index: 1;
+}
+
+.header-main-title-mobile {
+    display: none; /* Por padrão, escondido em desktop */
+}
+
+.header-main-title-desktop {
+    font-size: 2.8em;
+    font-weight: bold;
+    margin: 0 0 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: var(--text-color-header-light);
+}
+
+/* Botão de Menu Hambúrguer (Três Pontos) */
+.hamburger-menu {
+    display: none; /* Por padrão, escondido em desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1000;
+}
+
+.hamburger-menu .dot {
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 3px 0;
+}
+
+/* Botão de alternância de tema */
+.theme-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    fill: var(--text-color-header-light);
+    transition: fill 0.3s ease;
+    order: 2;
+}
+
+.theme-toggle svg {
+    display: block;
+}
+
+.theme-toggle:hover {
+    opacity: 0.8;
+}
+
+/* Conteúdo introdutório (parágrafo e botões) */
+.main-header-content p {
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+/* --- Menu Navbar (Modo Desktop: visível e na esquerda do header) --- */
+.navbar {
+    position: static; /* No desktop, o menu é estático */
+    top: auto;
+    left: auto;
+    transform: none;
+    width: auto;
+    height: auto;
+    background: none;
+    box-shadow: none;
+    transition: none;
+    z-index: 100;
+    display: block; /* Visível no desktop */
+    padding-top: 0;
+    right: auto;
+    margin-left: 0;
+    order: 1;
+
+    .menu-header {
+        display: none; /* Escondido no desktop */
+    }
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+}
+
+.navbar li {
+    display: inline-block;
+    width: auto;
+}
+
+.navbar a {
+    color: var(--text-color-header-light);
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    border-bottom: none;
+}
+
+.navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Botões de Ação (Download e Documentação) --- */
+.botao-container {
+    display: flex;
+    justify-content: center;
+    max-width: 400px;
+    margin: 25px auto 0;
+    gap: 20px;
+    width: 100%;
+}
+
+.botao-esquerda,
+.botao-direita {
+    flex: 1;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: white;
+    background-color: var(--button-blue);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.botao-esquerda:hover,
+.botao-direita:hover {
+    background-color: var(--button-blue-hover);
+    transform: translateY(-2px);
+}
+
+/* --- Conteúdo Principal (Main) --- */
+main {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease-out;
+    flex-grow: 1;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Seções de Conteúdo (SPA) --- */
+.conteudo {
+    display: none;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.conteudo.active {
+    display: block;
+}
+
+.conteudo h2 {
+    font-size: 2.5em;
+    color: var(--primary-medium);
+    margin-bottom: 20px;
+    border-bottom: var(--border-bottom-light);
+    padding-bottom: 10px;
+    transition: border-bottom 0.3s ease;
+}
+
+
+
+.conteudo p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: var(--body-text-color-light);
+     max-width: 1200px;
+    /* Remova a linha 'max-width: 700px;' daqui se ainda estiver */
+    margin: 0 auto; /* Corrigi para '0 auto' para centralizar */
+    padding: 0 20px;
+    text-align: justify;
+}
+
+
+
+    /* Se você quiser que o último parágrafo de #Inicio também estique, adicione: */
+    #Inicio p:last-of-type {
+        max-width: 1200px; /* Mesma largura ou ajuste conforme necessário */
+        padding: 0 40px;
+    }
+
+#Inicio p:last-of-type {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.conteudo a {
+    color: var(--button-blue);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.conteudo a:hover {
+    color: var(--button-blue-hover);
+    text-decoration: underline;
+}
+
+/* --- Rodapé --- */
+footer {
+    background: var(--footer-background-light);
+    color: var(--footer-text-color-light);
+    padding: 20px 40px;
+    text-align: center;
+    border-radius: 25px 25px 0 0;
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 10;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease-out;
+    flex-shrink: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.footer-links {
+    margin-top: 10px;
+    font-size: 0.9em;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-links a {
+    color: var(--footer-text-color-light);
+    text-decoration: none;
+    margin: 0 8px;
+    transition: text-decoration 0.3s ease;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+footer p {
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Animação de Fade-in --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Efeitos de Estrelas Cadentes (Globais e na Barra Superior) --- */
+
+.global-star-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 9999;
+}
+
+:root.dark-theme .global-star-background {
+    opacity: 1;
+}
+
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: global-star-fall linear forwards;
+}
+
+@keyframes global-star-fall {
+    0% {
+        transform: translate(var(--start-x), var(--start-y)) rotate(-45deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--end-x), var(--end-y)) rotate(-45deg);
+        opacity: 0;
+    }
+}
+
+.star.small {
+    width: 2px;
+    height: 2px;
+}
+
+.star.medium {
+    width: 3px;
+    height: 3px;
+}
+
+.star.large {
+    width: 4px;
+    height: 4px;
+}
+
+.header-main-title-desktop {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes fixed-star-fall {
+    0% {
+        transform: translate(0, 0) rotate(-45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-100px, 300px) rotate(-45deg);
+        opacity: 0;
+    }
+}
+
+
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.global-star-background .star {
+    animation: global-star-fall linear forwards;
+}
+
+.fixed-bar-stars .star-static {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.fixed-bar-stars .star-falling {
+    animation: fixed-star-fall linear forwards;
+    opacity: 0;
+}
+
+
+.star.small,
+.star-static.small,
+.star-falling.small {
+    width: 2px;
+    height: 2px;
+}
+
+.star.medium,
+.star-static.medium,
+.star-falling.medium {
+    width: 3px;
+    height: 3px;
+}
+
+.star.large,
+.star-static.large,
+.star-falling.large {
+    width: 4px;
+    height: 4px;
+}
+
+
+/* Estilos para a seção #Inicio (sem container visual) */
+#Inicio {
+    text-align: center;
+    padding: 40px 0;
+}
+
+#Inicio h2 {
+    display: none;
+}
+
+#Inicio>p:first-of-type {
+    display: none;
+}
+
+/* --- Galeria de Imagens --- */
+.galeria-imagens {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px auto;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.item-imagem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden; /* Essencial para esconder o figcaption inicialmente */
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    /* Por padrão (para desktop antes da media query de 1280px), ajusta a duas colunas */
+    width: calc(50% - 25px); /* Calcula largura para 2 colunas com 30px de gap */
+    height: 0; /* Necessário para o padding-bottom funcionar como proporção */
+    padding-bottom: calc(100% * 800 / 1280); /* Proporção 1280x800 -> 16:10 */
+    min-width: 300px; /* Evita que as imagens fiquem muito pequenas em telas desktop intermediárias */
+}
+
+.item-imagem:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.item-imagem img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Subtítulo flutuante (overlay) - DESKTOP E MOBILE */
+.item-imagem figcaption {
+    position: absolute; /* MANTIDO: Essencial para o comportamento de overlay */
+    bottom: 0; /* MANTIDO: Posiciona na parte inferior */
+    left: 0;
+    width: 100%;
+    background: var(--caption-overlay-background);
+    color: var(--caption-overlay-text);
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: bold;
+    transform: translateY(100%); /* MANTIDO: Escondido abaixo por padrão */
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    z-index: 2;
+}
+
+.item-imagem:hover figcaption,
+.item-imagem:focus figcaption {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* --- Media Query para Desktop (a partir de 1280px de largura) --- */
+@media (min-width: 1280px) {
+    .galeria-imagens {
+        max-width: 1280px; /* Limita a largura máxima da galeria inteira para 1280px */
+        padding: 0; /* Remove padding lateral extra para telas muito grandes */
+    }
+
+    .item-imagem {
+        width: 625px; /* Define uma largura fixa para cada imagem */
+        max-width: 625px; /* Garante que não ultrapasse a largura definida */
+        min-width: unset; /* Remove o min-width anterior */
+        height: 0; /* Essencial para o padding-bottom funcionar como proporção */
+        padding-bottom: calc(625px * 800 / 1280); /* Altura calculada para 16:10 */
+        border-radius: 8px; /* Mantém o border-radius para desktop */
+    }
+
+    .item-imagem figcaption {
+        font-size: 1.1em; /* Tamanho da fonte para desktop */
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+}
+
+
+/* --- Responsividade para telas menores que 1280px (Tablet e Mobile) --- */
+@media (max-width: 1279px) {
+    /* Header em Mobile */
+    header {
+        padding: 0;
+        align-items: stretch;
+        box-shadow: none;
+    }
+
+    .top-header-bar {
+        padding: 15px 20px;
+        /* Adiciona display flex e justify-content para alinhar elementos */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+
+    .header-main-title-mobile {
+        display: block; /* Mostra o título mobile */
+        font-size: 1.5em;
+        text-align: left;
+        flex-grow: 1;
+        white-space: normal;
+        margin: 0;
+        padding: 0;
+    }
+
+    .header-main-title-desktop {
+        display: none; /* Esconde o título desktop */
+    }
+
+    .hamburger-menu {
+        display: block; /* Mostra o menu de hambúrguer */
+        margin-left: auto; /* Empurra para a direita */
+        order: 3; /* Garante a ordem correta na top-header-bar */
+    }
+
+    .theme-toggle {
+        display: block;
+        order: 1; /* Garante a ordem correta na top-header-bar */
+        margin-left: 0;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
+
+    /* Navbar (Menu Off-Canvas para Mobile) */
+    .navbar {
+        position: fixed;
+        top: 0;
+        right: -300px; /* Esconde o menu fora da tela */
+        width: 300px;
+        height: 100%;
+        background-color: var(--primary-dark);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        transition: right 0.3s ease-out; /* Transição para abrir/fechar */
+        z-index: 1001; /* Fica acima de outros elementos */
+        display: flex;
+        flex-direction: column;
+        padding-top: 0;
+        margin-left: 0;
+        order: 2;
+    }
+
+    .navbar.open {
+        right: 0; /* Mostra o menu quando a classe 'open' é adicionada */
+    }
+
+    .menu-header {
+        display: flex; /* Mostra o cabeçalho do menu off-canvas */
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background-color: var(--primary-medium);
+        color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        min-height: 60px;
+    }
+
+    .close-menu {
+        background: none;
+        border: none;
+        font-size: 1.5em;
+        color: white;
+        cursor: pointer;
+        padding: 5px;
+        transition: opacity 0.2s ease;
+    }
+
+    .close-menu:hover {
+        opacity: 0.7;
+    }
+
+    .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 20px 0;
+        flex-grow: 1;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .navbar li {
+        width: 100%;
+    }
+
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        padding: 15px 20px;
+        display: block;
+        transition: background-color 0.2s ease;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar li:last-child a {
+        border-bottom: none;
+    }
+
+    /* Efeito de empurrar o conteúdo quando o menu abre */
+    body.menu-open main,
+    body.menu-open footer {
+        transform: translateX(-300px);
+        transition: transform 0.3s ease-out;
+    }
+
+    body.menu-open {
+        overflow: hidden; /* Evita scroll na tela principal quando o menu está aberto */
+    }
+
+    .botao-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .botao-esquerda,
+    .botao-direita {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+
+    main {
+        padding: 0;
+        margin: 0;
+    }
+
+    .conteudo {
+        padding: 20px 0;
+    }
+
+    .conteudo h2 {
+        font-size: 1.8em;
+    }
+
+    .conteudo p {
+        font-size: 1em;
+        padding: 0 15px;
+        max-width: 100%;
+    }
+
+    #Inicio p:last-of-type {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    footer {
+        padding: 15px 20px;
+    }
+
+    /* Galeria de Imagens - AJUSTES PARA MOBILE */
+    .galeria-imagens {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+        margin: 30px auto;
+        padding: 0 15px;
+    }
+
+    .item-imagem {
+        width: 95%; /* Ocupa 95% da largura disponível */
+        max-width: none; /* Remove qualquer max-width anterior */
+        min-width: unset;
+        height: 0; /* Volta a usar padding-bottom para proporção em mobile */
+        padding-bottom: calc(95% * 800 / 1280); /* Proporção 16:10 para mobile */
+        border-radius: 5px; /* Ajusta o border-radius para mobile */
+    }
+
+    .item-imagem img {
+        height: 100%;
+        border-radius: 5px;
+    }
+
+    /* Garante que o figcaption se comporte como overlay em mobile também */
+    .item-imagem figcaption {
+        font-size: 1em; /* Ajuste o tamanho da fonte para mobile */
+        border-bottom-left-radius: 5px; /* Ajusta o border-radius para mobile */
+        border-bottom-right-radius: 5px; /* Ajusta o border-radius para mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .top-header-bar {
+        padding: 10px 15px;
+    }
+
+    .main-header-content {
+        padding: 20px 15px 30px;
+        transition: all 0.3s ease-in-out;
+        padding-top: 50px;
+    }
+
+    .header-main-title-mobile {
+        font-size: 1.2em;
+    }
+
+    .main-header-content p {
+        font-size: 0.9em;
+    }
+
+    .botao-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .botao-esquerda,
+    .botao-direita {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    main {
+        padding: 0;
+        margin: 0;
+    }
+
+    .conteudo h2 {
+        font-size: 1.5em;
+    }
+
+    .conteudo p {
+        font-size: 1em;
+        padding: 0 10px;
+        max-width: 100%;
+    }
+
+    #Inicio p:last-of-type {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    footer {
+        padding: 10px 15px;
+    }
+
+    /* Galeria de Imagens - AJUSTES PARA TELAS MUITO PEQUENAS */
+    .galeria-imagens {
+        gap: 20px;
+        padding: 0 10px;
+    }
+
+    .item-imagem {
+        width: 100%;
+        height: 0; /* Continua usando padding-bottom para proporção */
+        padding-bottom: calc(100% * 800 / 1280); /* Proporção 16:10 */
+    }
+
+    .item-imagem img {
+        height: 100%;
+    }
+
+    /* Garante que o figcaption se comporte como overlay em mobile pequeno também */
+    .item-imagem figcaption {
+        font-size: 0.9em; /* Talvez um pouco menor para telas muito pequenas */
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+}
+
+
+
+
+.item-imagem img {
+    position: absolute; /* Posição absoluta para preencher a div pai */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ocupa 100% da largura do contêiner */
+    height: 100%; /* Ocupa 100% da altura do contêiner */
+    object-fit: contain; /* <--- ESSENCIAL: Redimensiona a imagem para caber na caixa, sem cortar */
+    /* Se você usar 'cover', a imagem pode ser cortada para preencher a caixa. 'contain' mostra ela inteira. */
+    display: block; /* Remove espaço extra que pode ser adicionado por alguns navegadores */
+}
+
+/* --- Variáveis de Tema (manter no seu CSS principal :root) --- */
+:root {
+    /* Cores padrão (tema claro) */
+    --primary-dark: #002244;
+    --primary-medium: #004488;
+    --primary-light: #0077cc;
+    --button-blue: #007acc;
+    --button-blue-hover: #005fa3;
+
+    /* Variáveis de tema claro */
+    --background-light: linear-gradient(to bottom, #d3d3e0, #c4cadb);
+    --text-color-light: #333;
+    --background-header-light: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--primary-light) 100%);
+    --text-color-header-light: white;
+    --background-main-light: white;
+    --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --border-bottom-light: 2px solid #eee;
+    --footer-background-light: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--primary-light) 100%);
+    --footer-text-color-light: white;
+    --body-text-color-light: #333;
+
+    /* Variáveis de tema claro para formulários */
+    --form-bg-color: #f7f7f7;
+    --card-bg-color: white;
+    --card-border-color: #e0e0e0;
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --heading-color: var(--primary-dark);
+    --input-border-color: #ccc;
+    --input-bg-color: white;
+    --input-text-color: #333;
+    --input-placeholder-color: #888;
+    --link-color: var(--button-blue);
+    --link-hover-color: var(--button-blue-hover);
+    --code-bg-color: #f0f0f0;
+    --code-text-color: #555;
+    --radio-label-color: #555;
+    --focus-outline-color: rgba(0, 119, 204, 0.4);
+
+    /* Cores para o título do XPath */
+    --xpath-title-color: #555;
+}
+/* --- Variáveis de Tema (manter no seu CSS principal :root) --- */
+:root {
+    /* Cores padrão (tema claro) */
+    --primary-dark: #002244;
+    --primary-medium: #004488;
+    --primary-light: #0077cc;
+    --button-blue: #007acc;
+    --button-blue-hover: #005fa3;
+
+    /* Variáveis de tema claro */
+    --background-light: linear-gradient(to bottom, #d3d3e0, #c4cadb);
+    --text-color-light: #333;
+    --background-header-light: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--primary-light) 100%);
+    --text-color-header-light: white;
+    --background-main-light: white;
+    --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --border-bottom-light: 2px solid #eee;
+    --footer-background-light: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--primary-light) 100%);
+    --footer-text-color-light: white;
+    --body-text-color-light: #333;
+
+    /* Variáveis de tema claro para formulários */
+    --form-bg-color: #f7f7f7;
+    --card-bg-color: white;
+    --card-border-color: #e0e0e0;
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --heading-color: var(--primary-dark);
+    --input-border-color: #ccc;
+    --input-bg-color: white;
+    --input-text-color: #333;
+    --input-placeholder-color: #888;
+    --link-color: var(--button-blue);
+    --link-hover-color: var(--button-blue-hover);
+    --code-bg-color: #f0f0f0;
+    --code-text-color: #555;
+    --radio-label-color: #555;
+    --focus-outline-color: rgba(0, 119, 204, 0.4);
+
+    /* Cores para o título do XPath */
+    --xpath-title-color: #555;
+
+    /* Novas Variáveis de Tema */
+    --success-color: #28a745; /* Cor para mensagem de sucesso (claro) */
+    --error-color: #dc3545; /* Cor para mensagem de erro (claro) */
+    --button-red: #dc3545; /* Para feedback de erro em input (claro) */
+}
+
+/* Tema escuro */
+:root.dark-theme {
+    --background-light: #1a1a2e;
+    --text-color-light: #e0e0e0;
+    --background-header-light: linear-gradient(135deg, #0f0f1d 0%, #1e1e3f 50%, #2a2a50 100%);
+    --text-color-header-light: #e0e0e0;
+    --background-main-light: #282840;
+    --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.5);
+    --border-bottom-light: #555;
+    --footer-background-light: linear-gradient(135deg, #0f0f1d 0%, #1e1e3f 50%, #2a2a50 100%);
+    --footer-text-color-light: #e0e0e0;
+    --button-blue: #6a9bd8;
+    --button-blue-hover: #4e7db8;
+    --body-text-color-light: #e0e0e0;
+
+    /* Variáveis de tema escuro para formulários */
+    --form-bg-color: #20203a;
+    --card-bg-color: #2e2e4e;
+    --card-border-color: #3a3a5a;
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    --heading-color: #e0e0e0;
+    --input-border-color: #555;
+    --input-bg-color: #3a3a5a;
+    --input-text-color: #e0e0e0;
+    --input-placeholder-color: #a0a0a0;
+    --link-color: var(--button-blue);
+    --link-hover-color: var(--button-blue-hover);
+    --code-bg-color: #1a1a2e;
+    --code-text-color: #a0a0a0;
+    --radio-label-color: #e0e0e0;
+    --focus-outline-color: rgba(106, 155, 216, 0.4);
+
+    /* Cores para o título do XPath */
+    --xpath-title-color: #a0a0a0;
+
+    /* Novas Variáveis de Tema */
+    --success-color: #2ecc71; /* Cor para mensagem de sucesso (escuro) */
+    --error-color: #e74c3c; /* Cor para mensagem de erro (escuro) */
+    --button-red: #e74c3c; /* Para feedback de erro em input (escuro) */
+}
+
+/* --- Seção de Teste (#teste) --- */
+#teste.conteudo {
+    padding: 60px 20px;
+    background-color: var(--form-bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* CENTRALIZA TODOS OS ITENS FILHOS DIRETOS (h2, p, form-test-group, button, message) */
+    max-width: 100vw;
+    margin: 0 auto;
+    transition: background-color 0.3s ease;
+}
+
+#teste h2 {
+    font-size: 2.8em;
+    color: var(--heading-color);
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--primary-light);
+    width: fit-content; /* Permite que o width se ajuste ao conteúdo */
+    margin-left: auto; /* Centraliza o bloco h2 */
+    margin-right: auto; /* Centraliza o bloco h2 */
+    text-align: center; /* Centraliza o texto do h2 */
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+#teste p {
+    max-width: 900px;
+    text-align: center; /* Centraliza o texto dos parágrafos */
+    margin-bottom: 25px;
+    line-height: 1.6;
+    font-size: 1.1em;
+    color: var(--body-text-color-light);
+    transition: color 0.3s ease;
+}
+
+#teste h3 {
+    font-size: 1.8em;
+    color: var(--heading-color);
+    margin-top: 40px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center; /* Centraliza o texto do h3 */
+    transition: color 0.3s ease;
+}
+
+/* --- Estilos para os Grupos de Formulário (form-test-group) --- */
+.form-test-group {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: var(--card-shadow);
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: center; /* Centraliza os dois blocos (input-and-label e xpath-container) quando lado a lado */
+    align-items: flex-start; /* Alinha o topo dos blocos */
+    /* Removido text-align: left; daqui para permitir que o conteúdo interno seja centralizado se necessário */
+    transition: all 0.3s ease;
+}
+
+.form-test-group:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Contêiner para o input/label */
+.input-and-label {
+    flex: 1;
+    margin-right: 20px;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza labels e inputs dentro de input-and-label */
+}
+
+.form-test-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: var(--heading-color);
+    font-size: 1.1em;
+    text-align: center; /* Centraliza o texto do label */
+    transition: color 0.3s ease;
+}
+
+.form-test-group input[type="text"],
+.form-test-group input[type="email"],
+.form-test-group input[type="password"],
+.form-test-group select {
+    width: 90%; /* Ajuste a largura para centralizar melhor */
+    margin-left: auto; /* Centraliza o input/select */
+    margin-right: auto; /* Centraliza o input/select */
+    padding: 12px;
+    margin-bottom: 0;
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    background-color: var(--input-bg-color);
+    color: var(--input-text-color);
+    font-size: 1em;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    text-align: center; /* Centraliza o texto digitado */
+}
+
+.form-test-group input::placeholder {
+    color: var(--input-placeholder-color);
+    opacity: 1;
+    transition: color 0.3s ease;
+    text-align: center; /* Centraliza o placeholder */
+}
+
+.form-test-group input:focus,
+.form-test-group select:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 4px var(--focus-outline-color);
+    outline: none;
+}
+
+/* Contêiner para o XPath */
+.xpath-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o título e XPaths dentro do seu contêiner */
+    margin-left: 20px;
+    max-width: 50%;
+}
+
+.xpath-title {
+    font-weight: bold;
+    color: var(--xpath-title-color);
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    text-align: center; /* Centraliza o texto do título do XPath */
+    transition: color 0.3s ease;
+}
+
+.xpath-display {
+    background-color: var(--code-bg-color);
+    color: var(--code-text-color);
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    font-size: 0.85em;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    overflow-x: auto;
+    white-space: pre-wrap; /* Mudei para pre-wrap para quebra de linha com preservação de espaços */
+    word-wrap: break-word; /* Garante que palavras longas quebrem */
+    align-self: center; /* Centraliza o bloco do XPath */
+    max-width: 90%; /* Ajuste a largura para centralizar melhor */
+    margin-left: auto; /* Centraliza o bloco do XPath */
+    margin-right: auto; /* Centraliza o bloco do XPath */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    text-align: center; /* Centraliza o texto dentro do XPath display */
+}
+
+/* Estilos específicos para Links (dentro do layout lado a lado) */
+.form-test-group a {
+    display: block; /* Mude para block para poder centralizar com text-align ou margin:auto */
+    margin-top: 0;
+    margin-bottom: 0;
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    text-align: center; /* Centraliza o texto do link */
+    width: fit-content; /* Ajusta a largura ao conteúdo */
+    margin-left: auto; /* Centraliza o bloco do link */
+    margin-right: auto; /* Centraliza o bloco do link */
+}
+
+.form-test-group a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+/* Estilos específicos para Radio Buttons (mantendo a estrutura flex) */
+.form-test-group.radio-group {
+    flex-direction: row; /* Mantém lado a lado em desktop */
+    justify-content: center; /* Centraliza o grupo de radios */
+    align-items: center; /* Alinha o centro (horizontal) dos radios */
+}
+
+.form-test-group.radio-group .input-and-label {
+    flex-direction: column;
+    margin-right: 20px;
+    align-items: center; /* Centraliza a pergunta e os radios */
+}
+
+.form-test-group.radio-group .input-and-label p {
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center; /* Centraliza o texto de pergunta */
+    padding: 0;
+    max-width: none;
+    color: var(--heading-color);
+    font-size: 1.1em;
+}
+
+.form-test-group.radio-group .input-and-label label {
+    display: flex; /* Mantém flex para input e texto do label */
+    align-items: center; /* Alinha o checkbox/radio e o texto */
+    justify-content: center; /* Tenta centralizar o label inteiro */
+    margin-bottom: 10px;
+    font-weight: normal;
+    font-size: 1em;
+    color: var(--radio-label-color);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    width: 100%; /* Permite que o justify-content funcione */
+}
+
+.form-test-group.radio-group .input-and-label input[type="radio"] {
+    margin-right: 10px;
+    margin-bottom: 0;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    flex-shrink: 0;
+    border: 2px solid var(--input-border-color);
+    appearance: none;
+    border-radius: 50%;
+    position: relative;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.form-test-group.radio-group .input-and-label input[type="radio"]:checked {
+    background-color: var(--primary-light);
+    border-color: var(--primary-light);
+}
+
+.form-test-group.radio-group .input-and-label input[type="radio"]:checked::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-test-group.radio-group .input-and-label input[type="radio"]:focus {
+    box-shadow: 0 0 0 3px var(--focus-outline-color);
+    border-color: var(--primary-light);
+}
+
+
+/* --- Media Queries para Responsividade da Seção de Teste --- */
+
+@media (max-width: 992px) {
+    .form-test-group {
+        flex-direction: column;
+        align-items: center; /* Centraliza os blocos (input-and-label e xpath-container) */
+    }
+
+    .input-and-label,
+    .xpath-container {
+        max-width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+        width: 100%;
+        align-items: center; /* CENTRALIZA OS ELEMENTOS DENTRO DE CADA BLOCO (label, input, xpath-title, xpath-display) */
+    }
+
+    .input-and-label {
+        margin-bottom: 20px;
+    }
+
+    .xpath-title {
+        margin-top: 15px;
+        align-self: center; /* Centraliza o título do XPath */
+    }
+
+    /* Centraliza o conteúdo interno de input-and-label e xpath-container quando empilhados */
+    .form-test-group label,
+    .form-test-group input,
+    .form-test-group select,
+    .form-test-group a {
+        text-align: center; /* Centraliza o texto de labels, inputs e links */
+        width: auto; /* Permite que o texto se ajuste ao conteúdo */
+    }
+
+    /* Ajusta para que o input e select possam centralizar */
+    .form-test-group input[type="text"],
+    .form-test-group input[type="email"],
+    .form-test-group input[type="password"],
+    .form-test-group select {
+        width: 90%; /* Ajusta a largura para não ficar muito grudado nas bordas ao centralizar */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .xpath-display {
+        text-align: center; /* Centraliza o texto do XPath */
+        width: 90%; /* Ajusta a largura para não ficar muito grudado nas bordas */
+        margin-left: auto;
+        margin-right: auto;
+        white-space: normal; /* Permite quebras de linha para XPaths longos em telas pequenas */
+        overflow-x: hidden; /* Esconde rolagem horizontal */
+    }
+}
+
+@media (max-width: 768px) {
+    #teste.conteudo {
+        padding: 40px 15px;
+    }
+
+    #teste h2 {
+        font-size: 2.2em;
+        margin-bottom: 25px;
+    }
+
+    #teste p {
+        font-size: 1em;
+        margin-bottom: 20px;
+    }
+
+    #teste h3 {
+        font-size: 1.6em;
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+
+    .form-test-group {
+        padding: 20px;
+        margin-bottom: 15px;
+        max-width: 95%;
+    }
+
+    .form-test-group label {
+        font-size: 1em;
+        margin-bottom: 8px;
+    }
+
+    .form-test-group input[type="text"],
+    .form-test-group input[type="email"],
+    .form-test-group input[type="password"],
+    .form-test-group select {
+        padding: 10px;
+        font-size: 0.95em;
+    }
+
+    .form-test-group.radio-group .input-and-label label {
+        font-size: 0.95em;
+    }
+
+    .xpath-display {
+        font-size: 0.8em;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #teste.conteudo {
+        padding: 30px 10px;
+    }
+
+    #teste h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    #teste p {
+        font-size: 0.9em;
+        margin-bottom: 15px;
+    }
+
+    #teste h3 {
+        font-size: 1.4em;
+        margin-top: 25px;
+        margin-bottom: 10px;
+    }
+
+    .form-test-group {
+        padding: 15px;
+        margin-bottom: 10px;
+        max-width: 100%;
+    }
+
+    .form-test-group label {
+        font-size: 0.9em;
+        margin-bottom: 5px;
+    }
+
+    .form-test-group input[type="text"],
+    .form-test-group input[type="email"],
+    .form-test-group input[type="password"],
+    .form-test-group select {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    .form-test-group.radio-group .input-and-label label {
+        font-size: 0.9em;
+    }
+
+    .xpath-display {
+        font-size: 0.75em;
+        padding: 6px 10px;
+    }
+}
+
+/* --- Estilos para o Botão Registrar-se --- */
+.register-button {
+    background-color: var(--button-blue);
+    color: var(--text-color-header-light);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--box-shadow-light);
+    align-self: center; /* JÁ ESTÁ CENTRALIZADO */
+}
+
+.register-button:hover {
+    background-color: var(--button-blue-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.register-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Estilos para a Mensagem de Registro --- */
+.registration-success-message {
+    font-size: 1.2em;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center; /* CENTRALIZA O TEXTO DA MENSAGEM */
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    width: 100%;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    align-self: center; /* JÁ ESTÁ CENTRALIZADO */
+}
+
+
+
+
+
+
+
+
+/* Variáveis de Cores (Atualizadas para o tema escuro predominante) */
+:root {
+    --bg-dark: #1e1e2d; /* Fundo escuro principal */
+    --bg-dark-light: #2a2a3a; /* Fundo um pouco mais claro (para cards/elementos) */
+    --bg-card: #2f2f40; /* Fundo para cards e seções internas */
+    --bg-input: #3e3e50; /* Fundo para inputs */
+    --text-light: #e0e0e0; /* Cor do texto claro */
+    --text-medium: #a0a0b0; /* Cor do texto secundário */
+    --text-label: #b0b0c0; /* Cor para labels */
+    --primary-blue: #007bff; /* Azul primário para botões e destaques */
+    --primary-blue-hover: #0056b3;
+    --secondary-teal: #17a2b8; /* Azul teal para botões secundários */
+    --secondary-teal-hover: #138496;
+    --green-btn: #28a745; /* Botão verde */
+    --green-btn-hover: #218838;
+    --red-btn: #dc3545; /* Botão vermelho */
+    --red-btn-hover: #c82333;
+    --border-color-dark: #3e3e50; /* Cor da borda escura */
+    --border-color-light: #4c4c60; /* Cor da borda um pouco mais clara */
+    --shadow-dark: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para elementos escuros */
+    --font-family-sans: 'Roboto', sans-serif;
+    --font-family-mono: 'Fira Code', monospace;
+}
+
+/* Base Body Styles (mantido do anterior, certifique-se de que está no topo do CSS) */
+body {
+    font-family: var(--font-family-sans);
+    background-color: var(--bg-dark); /* Fundo escuro */
+    color: var(--text-light);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container { /* Usado na navbar */
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+
+
+/* Conteúdo das Seções (mantido do anterior) */
+.conteudo {
+    display: none;
+    padding: 40px 0;
+    min-height: calc(100vh - 80px);
+}
+
+.conteudo.active-section {
+    display: block;
+}
+
+
+/* --- Início: Estilos para a Seção "Início" (mantidos do anterior) --- */
+.hero-section {
+    text-align: center;
+    padding: 80px 20px 60px;
+    background: linear-gradient(135deg, var(--bg-dark), #151520);
+    border-radius: 15px;
+    margin-bottom: 50px;
+    box-shadow: var(--shadow-dark);
+}
+
+.hero-section h1 {
+    font-size: 3.5em;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+}
+
+.hero-section p {
+    font-size: 1.3em;
+    color: var(--text-medium);
+    max-width: 800px;
+    margin: 0 auto 40px;
+    line-height: 1.5;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 15px 35px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    color: white;
+    border: 2px solid var(--primary-blue);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-blue-hover);
+    border-color: var(--primary-blue-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--secondary-teal);
+    border: 2px solid var(--secondary-teal);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-teal);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+.preview-section {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.preview-section h3 {
+    font-size: 2.2em;
+    color: var(--text-light);
+    margin-bottom: 30px;
+    font-weight: 600;
+    position: relative;
+}
+
+.preview-section h3::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: var(--primary-blue);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+.preview-images {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.preview-image-large,
+.preview-image-small {
+    border-radius: 10px;
+    box-shadow: var(--shadow-dark);
+    border: 1px solid var(--border-color-dark); /* Usar border-color-dark */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.preview-image-large {
+    max-width: 65%;
+    height: auto;
+}
+
+.preview-image-small {
+    max-width: 30%;
+    height: auto;
+}
+
+.preview-image-large:hover,
+.preview-image-small:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.about-section {
+    background-color: var(--bg-dark-light);
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: var(--shadow-dark);
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-section p {
+    font-size: 1.1em;
+    color: var(--text-medium);
+    line-height: 1.7;
+}
+
+/* --- Seção de Configurações (#baixar) --- */
+#baixar {
+    padding: 0; /* Remove padding da seção principal, o padding será dos elementos internos */
+    background-color: var(--bg-dark); /* Usa o fundo escuro principal */
+    border-radius: 0; /* Remove border-radius */
+    box-shadow: none; /* Remove shadow */
+    width: 100%;
+    max-width: 100%; /* Ocupa a largura total */
+    margin: 0;
+    display: flex; /* Para centralizar o conteúdo da config */
+    justify-content: center;
+    align-items: flex-start; /* Alinha ao topo */
+    min-height: calc(100vh - 80px); /* Ocupa a altura restante da viewport */
+}
+
+/* Títulos gerais da seção Config, se ainda forem usados */
+#baixar h2, #baixar > p {
+    display: none; /* Esconde estes títulos, pois o design da imagem não os tem */
+}
+
+.config-header {
+    background-color: var(--bg-dark-light);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color-dark);
+    position: absolute; /* Posiciona no topo da área de conteúdo */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50; /* Garante que fique acima do conteúdo */
+}
+
+.config-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.status-label {
+    font-weight: 600;
+    color: var(--text-light);
+}
+.status-disabled {
+    background-color: #dc3545; /* Vermelho para Disabled */
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.status-message {
+    color: var(--text-medium);
+    font-size: 0.9em;
+}
+
+.config-actions-top {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+.icon-btn svg {
+    width: 20px;
+    height: 20px;
+    color: var(--text-medium);
+}
+.icon-btn:hover {
+    background-color: rgba(var(--primary-blue-rgb, 0, 123, 255), 0.2);
+}
+
+
+/* Conteúdo principal da configuração - Grid de duas colunas */
+.config-content {
+    display: flex; /* Usamos flexbox para a divisão lateral */
+    width: 100%;
+    max-width: 1400px; /* Adapta-se à largura da imagem */
+    margin-top: 50px; /* Espaço para o config-header */
+    height: calc(100vh - 80px - 50px); /* Altura total - navbar - header fixo */
+    border: 1px solid var(--border-color-dark); /* Borda em torno de todo o conteúdo */
+    border-top: none; /* Sem borda no topo, já tem no header */
+    overflow: hidden; /* Para garantir que o scroll esteja nas colunas */
+}
+
+/* Coluna Esquerda: Sidebar */
+.config-sidebar {
+    width: 280px; /* Largura fixa para a sidebar conforme a imagem */
+    background-color: var(--bg-dark-light);
+    border-right: 1px solid var(--border-color-dark);
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; /* Não permite encolher */
+    overflow-y: auto; /* Scroll para a lista de configs */
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 15px 15px; /* Padding inferior para separar da lista */
+    border-bottom: 1px solid var(--border-color-dark);
+    margin-bottom: 15px;
+}
+
+.btn-new-config {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.btn-new-config:hover {
+    background-color: var(--primary-blue-hover);
+}
+.btn-new-config svg {
+    width: 18px;
+    height: 18px;
+    color: white;
+}
+
+.search-box {
+    position: relative;
+    flex-grow: 1;
+}
+.search-box input {
+    width: 100%;
+    padding: 8px 10px 8px 30px; /* Padding para o ícone de busca */
+    border: 1px solid var(--border-color-dark);
+    border-radius: 5px;
+    background-color: var(--bg-input);
+    color: var(--text-light);
+    font-size: 0.9em;
+    box-sizing: border-box;
+}
+.search-box input::placeholder {
+    color: var(--text-medium);
+}
+.search-box svg {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: var(--text-medium);
+}
+
+.config-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color-dark); /* Linha divisória */
+    transition: background-color 0.2s ease;
+}
+.config-list-item:last-child {
+    border-bottom: none; /* Remove borda do último item */
+}
+.config-list-item:hover {
+    background-color: var(--bg-input); /* Cor de hover */
+}
+.config-list-item.active {
+    background-color: var(--primary-blue); /* Cor do item ativo */
+    color: white;
+}
+.config-list-item.active .item-url {
+    color: rgba(255, 255, 255, 0.8);
+}
+.config-list-item.active .item-options svg {
+    color: white;
+}
+
+.config-list-item .item-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+}
+.config-list-item .item-name {
+    font-weight: 500;
+    font-size: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.config-list-item .item-url {
+    font-size: 0.8em;
+    color: var(--text-medium);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.config-list-item .item-options {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+.config-list-item .item-options svg {
+    width: 18px;
+    height: 18px;
+    color: var(--text-medium);
+}
+.config-list-item .item-options:hover {
+    background-color: rgba(var(--primary-blue-rgb, 0, 123, 255), 0.2);
+}
+
+
+/* Coluna Direita: Detalhes da Configuração */
+.config-details {
+    flex-grow: 1; /* Ocupa o restante do espaço */
+    background-color: var(--bg-card); /* Fundo para a área de detalhes */
+    padding: 20px;
+    overflow-y: auto; /* Scroll para a área de detalhes se o conteúdo for muito longo */
+}
+
+.details-header {
+    display: flex;
+    align-items: flex-end; /* Alinha labels ao topo, inputs na linha de base */
+    gap: 20px; /* Espaço entre os grupos de input */
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color-dark); /* Linha divisória */
+}
+
+.config-name-input,
+.config-url-input,
+.config-init-wait-input {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Permite que cresçam */
+}
+
+.config-name-input label,
+.config-url-input label,
+.config-init-wait-input label {
+    color: var(--text-label);
+    font-size: 0.85em;
+    margin-bottom: 5px;
+}
+
+.config-name-input input,
+.config-url-input input,
+.config-init-wait-input input {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color-dark);
+    padding: 8px 12px;
+    border-radius: 5px;
+    color: var(--text-light);
+    font-size: 0.95em;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.config-name-input input:focus,
+.config-url-input input:focus,
+.config-init-wait-input input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.3);
+}
+
+.config-url-input .required {
+    color: var(--red-btn); /* Cor do asterisco vermelho */
+}
+
+.config-init-wait-input {
+    max-width: 100px; /* Largura fixa para o input de segundos */
+    flex-grow: 0; /* Não cresce */
+}
+
+.config-toggle-enable {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px; /* Espaço para o toggle */
+    flex-shrink: 0; /* Não encolhe */
+}
+.config-toggle-enable .toggle-label {
+    color: var(--text-label);
+    font-size: 0.85em;
+}
+
+/* Switch Toggle (Copiado e adaptado do design comum de toggle) */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--border-color-dark); /* Cor off */
+    transition: .4s;
+    border-radius: 22px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--text-light); /* Cor do "círculo" */
+    transition: .4s;
+    border-radius: 50%;
+}
+input:checked + .slider {
+    background-color: var(--green-btn); /* Cor on */
+}
+input:checked + .slider:before {
+    transform: translateX(18px);
+}
+
+
+/* Action Section (Lista de XPaths) */
+.action-section {
+    background-color: var(--bg-dark-light); /* Fundo da seção de ações */
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: var(--shadow-dark);
+}
+
+.action-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.action-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--text-light);
+}
+.action-status-message {
+    font-size: 0.85em;
+    color: var(--text-medium);
+    font-style: italic;
+}
+.action-buttons-group {
+    display: flex;
+    gap: 10px;
+}
+.btn-batch, .btn-add-action {
+    background-color: var(--primary-blue); /* Botões com azul */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.btn-batch {
+    background-color: var(--secondary-teal); /* Batch com azul teal */
+}
+.btn-batch:hover {
+    background-color: var(--secondary-teal-hover);
+}
+.btn-add-action:hover {
+    background-color: var(--primary-blue-hover);
+}
+.btn-add-action svg {
+    width: 16px;
+    height: 16px;
+    color: white;
+}
+
+/* Cabeçalhos da Tabela de XPaths */
+.action-list-headers {
+    /* Ajuste as colunas: num, name, element-finder, interval-ms, value, repeat, actions */
+    display: grid;
+    grid-template-columns: 30px 100px 2.5fr 80px 1.5fr 60px 80px; /* Adicionado 80px para Intervalo MS */
+    gap: 5px;
+    background-color: var(--bg-input); /* Fundo mais escuro para os cabeçalhos */
+    padding: 10px 5px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: var(--text-label);
+    border: 1px solid var(--border-color-dark);
+}
+
+.header-item {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+.header-item.header-num { text-align: center; justify-content: center; } /* Centraliza o # */
+.header-item.header-actions { justify-content: flex-end; } /* Alinha a direita */
+
+.info-icon {
+    background-color: var(--text-medium);
+    color: var(--bg-input);
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    font-size: 0.7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: help;
+}
+
+/* Linha de Ação XPath (corpo da tabela) */
+.xpath-actions-table {
+    margin-top: 10px;
+}
+.xpath-action-row {
+    /* Ajuste as colunas: num, name, element-finder, interval-ms, value, repeat, actions */
+    display: grid;
+    grid-template-columns: 30px 100px 2.5fr 80px 1.5fr 60px 80px; /* Mesmas colunas do cabeçalho */
+    gap: 5px;
+    background-color: var(--bg-dark); /* Fundo escuro para a linha */
+    padding: 8px 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    align-items: center;
+    border: 1px solid var(--border-color-dark);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.xpath-action-row:hover {
+    background-color: #262635; /* Um pouco mais claro no hover */
+    border-color: var(--primary-blue); /* Borda azul no hover */
+}
+
+.xpath-action-row .col {
+    color: var(--text-light);
+    font-size: 0.9em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 5px; /* Pequeno padding nas colunas */
+    /* Adicionado para centralizar conteúdo de colunas */
+    display: flex;
+    align-items: center;
+}
+.xpath-action-row .col-num {
+    text-align: center;
+    font-weight: bold;
+    color: var(--text-medium);
+    justify-content: center; /* Centraliza o número */
+}
+.xpath-action-row .col-element-finder,
+.xpath-action-row .col-value,
+.xpath-action-row .col-name {
+    font-family: var(--font-family-sans); /* Volta para a fonte sans-serif */
+    overflow: visible; /* Permite que o input não seja cortado */
+    white-space: normal; /* Permite quebra de linha dentro do input */
+}
+
+/* Estilo para os inputs inline dentro das colunas da tabela */
+.xpath-action-row .input-inline {
+    width: 100%;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color-dark);
+    padding: 4px 8px; /* Padding menor para inputs na linha */
+    border-radius: 4px;
+    color: var(--text-light);
+    font-size: 0.85em; /* Fonte um pouco menor para inputs inline */
+    outline: none;
+    box-sizing: border-box; /* Garante que padding não aumente a largura */
+    font-family: var(--font-family-mono); /* Mantém monospace para XPath/Value/Name */
+}
+.xpath-action-row .input-inline:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+/* Ajuste específico para o input de número na coluna repeat e interval-ms */
+.xpath-action-row .col-repeat input,
+.xpath-action-row .col-interval-ms input {
+    text-align: center; /* Centraliza o texto em inputs numéricos */
+}
+
+.xpath-action-row .col-actions {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+}
+.action-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+.action-icon-btn svg {
+    width: 18px;
+    height: 18px;
+    color: var(--text-medium);
+}
+.action-icon-btn:hover svg {
+    color: var(--primary-blue);
+}
+.action-icon-btn.delete-btn:hover svg {
+    color: var(--red-btn);
+}
+.action-icon-btn.edit-btn:hover svg {
+    color: var(--secondary-teal); /* Uma cor diferente para o edit */
+}
+
+
+/* MODAL DE CONFIGURAÇÃO DE AÇÃO */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 2000; /* Acima de todo o resto */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6); /* Overlay escuro */
+    display: flex; /* Usar flex para centralizar */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--bg-dark-light); /* Fundo da modal */
+    margin: auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    width: 90%;
+    max-width: 500px; /* Largura máxima da modal */
+    border: 1px solid var(--border-color-dark);
+    box-sizing: border-box; /* Para padding e border não aumentarem o tamanho */
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color-dark);
+}
+.modal-header h3 {
+    color: var(--text-light);
+    font-size: 1.5em;
+    margin: 0;
+}
+.modal-header-icons {
+    display: flex;
+    gap: 8px;
+}
+.modal-header-icons .icon-btn svg {
+    color: var(--text-medium);
+}
+.modal-header-icons .icon-btn:hover svg {
+    color: var(--primary-blue);
+}
+
+.modal-body {
+    margin-bottom: 25px;
+}
+.modal-description {
+    color: var(--text-medium);
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.input-group-modal {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.input-group-modal label {
+    color: var(--text-label);
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+.input-group-modal input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color-dark);
+    border-radius: 5px;
+    background-color: var(--bg-input);
+    color: var(--text-light);
+    font-size: 1em;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input-group-modal input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.3);
+}
+
+.modal-options {
+    display: flex;
+    flex-wrap: wrap; /* Permite quebra de linha para responsividade */
+    gap: 20px; /* Espaço entre os grupos de opções */
+    align-items: flex-end; /* Alinha labels ao topo, inputs na linha de base */
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color-dark);
+}
+.modal-options.modal-row { /* Nome mais claro para a nova classe */
+    justify-content: space-between; /* Espalha os itens */
+}
+
+.modal-options .small-input {
+    flex: 1; /* Permite que ocupem espaço igualmente */
+    min-width: 120px; /* Largura mínima para inputs menores */
+}
+
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px; /* Espaço do input acima */
+}
+.radio-group input[type="radio"] {
+    display: none; /* Esconde o radio button padrão */
+}
+.radio-group label {
+    position: relative;
+    padding-left: 25px; /* Espaço para o radio button customizado */
+    cursor: pointer;
+    color: var(--text-medium);
+    font-size: 0.95em;
+    margin-bottom: 0; /* Override do margin-bottom padrão */
+}
+.radio-group label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border-color-dark);
+    border-radius: 50%;
+    background-color: var(--bg-input);
+    transition: all 0.2s ease;
+}
+.radio-group input[type="radio"]:checked + label::before {
+    border-color: var(--primary-blue);
+    background-color: var(--primary-blue);
+}
+.radio-group label::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-light);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.radio-group input[type="radio"]:checked + label::after {
+    opacity: 1;
+}
+
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color-dark);
+}
+.modal-footer .btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    box-shadow: none; /* Remove shadow para botões de modal */
+}
+.modal-footer .btn-danger {
+    background-color: var(--red-btn);
+    color: white;
+    border: none;
+}
+.modal-footer .btn-danger:hover {
+    background-color: var(--red-btn-hover);
+}
+
+/* Responsividade (manter e ajustar conforme necessário) */
+@media (max-width: 768px) {
+    .config-content {
+        flex-direction: column;
+        height: auto; /* Permite que a altura se ajuste em telas menores */
+    }
+    .config-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color-dark);
+    }
+    .config-details {
+        padding: 15px;
+    }
+    .details-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    .config-name-input,
+    .config-url-input,
+    .config-init-wait-input {
+        max-width: 100%; /* Ocupa a largura total */
+    }
+    .config-toggle-enable {
+        margin-left: 0;
+        justify-content: flex-start;
+    }
+    .action-list-headers,
+    .xpath-action-row {
+        grid-template-columns: 30px 1fr 1fr 1fr 1fr 1fr 60px; /* Ajusta as colunas para caber melhor */
+        font-size: 0.8em;
+    }
+    .xpath-action-row .col-num {
+        padding: 0 2px;
+    }
+    .xpath-action-row .input-inline {
+        padding: 3px 6px;
+        font-size: 0.8em;
+    }
+    .xpath-action-row .col-actions {
+        gap: 2px;
+    }
+    .action-icon-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+    .modal-options.modal-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .config-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .config-actions-top {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .sidebar-header {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .btn-new-config {
+        width: 100%;
+        justify-content: center;
+    }
+    .search-box {
+        width: 100%;
+    }
+    .more-options {
+        margin-left: auto;
+    }
+    .action-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .action-buttons-group {
+        width: 100%;
+        justify-content: space-around;
+    }
+    .btn-batch, .btn-add-action {
+        flex-grow: 1;
+        justify-content: center;
+    }
+    .action-list-headers,
+    .xpath-action-row {
+        grid-template-columns: 30px 1fr 1fr 1fr 1fr 1fr 60px; /* Pode precisar de mais ajustes específicos */
+        font-size: 0.75em;
+    }
+}
+
+
+
+/* --- Container Principal de Teste --- */
+.test-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* --- Título da Seção --- */
+.test-container h2 {
+    font-size: 2.8em;
+    color: var(--heading-color);
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--primary-light);
+    width: fit-content;
+    text-align: center;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+/* --- Texto Introdutório --- */
+.test-container > p {
+    max-width: 900px;
+    text-align: center;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+    font-size: 1.1em;
+    color: var(--body-text-color-light);
+    transition: color 0.3s ease;
+}
+
+/* --- Grupos de Formulário --- */
+.form-test-group {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: var(--card-shadow);
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+}
+
+.form-test-group:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Contêiner de Input/Label --- */
+.input-and-label {
+    flex: 1;
+    margin-right: 20px;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-test-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: var(--heading-color);
+    font-size: 1.1em;
+    text-align: center;
+    transition: color 0.3s ease;
+    width: 100%;
+}
+
+.form-test-group input[type="text"],
+.form-test-group input[type="email"],
+.form-test-group input[type="password"] {
+    width: 90%;
+    padding: 12px;
+    margin-bottom: 0;
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    background-color: var(--input-bg-color);
+    color: var(--input-text-color);
+    font-size: 1em;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+}
+
+.form-test-group input::placeholder {
+    color: var(--input-placeholder-color);
+    opacity: 1;
+    transition: color 0.3s ease;
+    text-align: center;
+}
+
+.form-test-group input:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 4px var(--focus-outline-color);
+    outline: none;
+}
+
+/* --- Contêiner de XPath --- */
+.xpath-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+    max-width: 50%;
+}
+
+.xpath-title {
+    font-weight: bold;
+    color: var(--xpath-title-color);
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    text-align: center;
+    transition: color 0.3s ease;
+    width: 100%;
+}
+
+.xpath-display {
+    background-color: var(--code-bg-color);
+    color: var(--code-text-color);
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    font-size: 0.85em;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: center;
+    width: 90%;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* --- Botão de Registrar --- */
+.register-button {
+    background-color: var(--button-blue);
+    color: var(--text-color-header-light);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 20px 0;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--box-shadow-light);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.register-button:hover {
+    background-color: var(--button-blue-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.register-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Mensagem de Sucesso --- */
+.registration-success-message {
+    font-size: 1.2em;
+    margin: 20px auto;
+    text-align: center;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    max-width: 500px;
+    width: 100%;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* --- Responsividade --- */
+@media (max-width: 992px) {
+    .test-container {
+        padding: 30px 15px;
+    }
+    
+    .test-container h2 {
+        font-size: 2.2em;
+        margin-bottom: 25px;
+    }
+    
+    .test-container > p {
+        font-size: 1em;
+        margin-bottom: 30px;
+    }
+    
+    .form-test-group {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .input-and-label,
+    .xpath-container {
+        max-width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+        width: 100%;
+        align-items: center;
+    }
+    
+    .input-and-label {
+        margin-bottom: 20px;
+    }
+    
+    .xpath-title {
+        margin-top: 15px;
+    }
+    
+    .form-test-group input[type="text"],
+    .form-test-group input[type="email"],
+    .form-test-group input[type="password"] {
+        width: 95%;
+    }
+    
+    .xpath-display {
+        width: 95%;
+        white-space: normal;
+        overflow-x: hidden;
+    }
+}
+
+@media (max-width: 768px) {
+    .test-container {
+        padding: 20px 10px;
+    }
+    
+    .test-container h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+    
+    .test-container > p {
+        font-size: 0.9em;
+        margin-bottom: 25px;
+    }
+    
+    .form-test-group {
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+    
+    .form-test-group label {
+        font-size: 1em;
+        margin-bottom: 8px;
+    }
+    
+    .form-test-group input[type="text"],
+    .form-test-group input[type="email"],
+    .form-test-group input[type="password"] {
+        padding: 10px;
+        font-size: 0.95em;
+    }
+    
+    .xpath-display {
+        font-size: 0.8em;
+        padding: 8px 12px;
+    }
+    
+    .register-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+    
+    .registration-success-message {
+        font-size: 1em;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .test-container {
+        padding: 15px 5px;
+    }
+    
+    .test-container h2 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+    
+    .test-container > p {
+        font-size: 0.85em;
+        margin-bottom: 20px;
+    }
+    
+    .form-test-group {
+        padding: 12px;
+        margin-bottom: 8px;
+    }
+    
+    .form-test-group label {
+        font-size: 0.9em;
+        margin-bottom: 5px;
+    }
+    
+    .form-test-group input[type="text"],
+    .form-test-group input[type="email"],
+    .form-test-group input[type="password"] {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+    
+    .xpath-display {
+        font-size: 0.75em;
+        padding: 6px 10px;
+    }
+    
+    .register-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    
+    .registration-success-message {
+        font-size: 0.9em;
+        padding: 6px 10px;
+    }
+}
