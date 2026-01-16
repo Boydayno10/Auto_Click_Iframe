@@ -1,235 +1,719 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Auto Clicker - Form Helper</title>
-    <link rel="icon" href="images/logo.png" type="image/x-icon">
+    <!-- Ícone e assets em nível de projeto web -->
+    <link rel="icon" href="../images/logo-128.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The Auto Clicker - Form Helper extension automates clicks and form filling on websites and dynamic iframes to boost your productivity.">
-    <meta name="keywords" content="auto clicker, autofill, web automation, automatic filling, chrome extension, productivity, form helper, iframe clicker">
-    <meta name="author" content="Your Name or Company Name">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://boydayno10.github.io/Auto_Click_Iframe/m">
-    <meta property="og:title" content="Auto Clicker - Form Helper">
-    <meta property="og:description" content="The Auto Clicker - Form Helper extension automates clicks and form filling on websites and dynamic iframes to boost your productivity.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourwebsite.com">
-    <meta property="og:image" content="https://yourwebsite.com/path/to/share-image.jpg">
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7923004905601195"
-    crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="options.css">
+   
 </head>
 <body>
-    <div class="global-star-background"></div>
-
-    <header>
+    <header class="site-header">
         <div class="top-header-bar">
-            <div class="fixed-bar-stars"></div>
-
-            <nav class="navbar" id="mobile-menu">
-                <div class="menu-header">
-                    <span class="menu-title">Auto Clicker - Form Helper</span>
-                    <button class="close-menu" aria-label="Close Menu">×</button>
+            <div class="topbar-inner">
+                <div class="topbar-left">
+                    <a href="index.html" class="site-logo-square" aria-label="Auto Clicker - Form Helper home">
+                        A
+                    </a>
+                    <nav class="navbar" aria-label="Main navigation">
+                        <ul>
+                            <li><a href="index.html#docs">Docs</a></li>
+                            <li><a href="index.html#teste">Teste</a></li>
+                            <li><a href="index.html#privacy">Políticas de privacidade</a></li>
+                            <li class="nav-extension-link"><a href="options.html">Extensão</a></li>
+                        </ul>
+                    </nav>
+                    <span class="topbar-title-desktop">Auto Clicker - Form Helper</span>
                 </div>
-                <ul>
-                    <li><a href="#Inicio">Home</a></li>
-                    <li><a href="#teste">Test</a></li>
-                    <li><a href="#politicas">Privacy Policy</a></li>
-                </ul>
-            </nav>
 
-            <button class="theme-toggle" aria-label="Toggle theme">
-                <svg id="theme-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"></svg>
-            </button>
-
-            <span class="header-main-title-mobile">Auto Clicker - Form Helper</span>
-
-            <button class="hamburger-menu" aria-label="Open Menu">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </button>
-        </div>
-
-        <div class="main-header-content">
-            <span class="header-main-title-desktop">Auto Clicker - Form Helper</span>
-            <p>This extension allows you to inject and execute automatic clicks on websites and dynamic iframes in a simple and efficient way.</p>
-            <div class="botao-container">
-                <a href="https://chromewebstore.google.com/detail/jgkeppcdhlodchbjljdiajbieephocnb?utm_source=item-share-cb" class="botao-esquerda" target="_blank">Download</a>
-                <a href="https://github.com/Boydayno10/Auto_Click_Iframe.git" class="botao-direita" target="_blank">Documentation</a>
+                <div class="topbar-right">
+                    <button class="topbar-menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </button>
+                    <div class="topbar-links">
+                        <a href="https://github.com/Boydayno10/Auto_Click_Iframe" class="topbar-icon-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 499.36" role="img" class="navbar-nav-svg" height="16" width="16">
+                                <title>GitHub</title>
+                                <path fill="currentColor" fill-rule="evenodd" d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z"></path>
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com/@mozinsanou4136" class="topbar-icon-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" role="img" class="navbar-nav-svg" height="16" width="16">
+                                <title>YouTube</title>
+                                <path fill="currentColor" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path>
+                            </svg>
+                        </a>
+                        <div class="topbar-lang" data-lang-switcher>
+                            <button class="topbar-lang-btn" type="button" aria-label="Idioma" aria-expanded="false">
+                                <span class="topbar-lang-code">PT</span>
+                                <svg class="topbar-lang-caret" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                                    <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <div class="topbar-lang-menu" hidden>
+                                <button class="topbar-lang-option" type="button" data-lang="pt-BR">Português (BR)</button>
+                                <button class="topbar-lang-option" type="button" data-lang="en">English</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <main>
-        <section id="Inicio" class="conteudo active">
-            <h2>Welcome!</h2>
-            <p>Discover how our extension can transform your productivity by automating repetitive tasks on the web.</p>
-
-            <div class="galeria-imagens">
-                <div class="item-imagem">
-                    <a href="images/Screen_01.png" target="_blank">
-                        <img src="images/Screen_01.png" alt="Screenshot of the extension in action - Image 1">
-                    </a>
-                    <figcaption>Simple extension popup</figcaption>
-                </div>
-                <div class="item-imagem">
-                    <a href="images/Screen_02.png" target="_blank">
-                        <img src="images/Screen_02.png" alt="Autofill interface - Image 2">
-                    </a>
-                    <figcaption>Click and Autofill settings interface</figcaption>
-                </div>
-            </div>
-
-            <p>The Auto Clicker - Form Helper is the ultimate solution — a powerful Chrome extension built to automate any type of click interaction and form filling quickly, easily, and intuitively 🚀. With it, you save time and simplify your daily web tasks.</p>
-        </section>
-
-        <!-- ------------- TESTE ------------- -->
-        <section id="teste" class="conteudo">
-            <div class="test-container">
-                <h2>Test the Extension</h2>
-
-            
-<p>You can use the extension to fill these fields and see how the automation works in real time. 
-Remember that the extension can find and fill inputs using both XPath and CSS Selectors.</p>
 
 
-                <!-- FULL NAME -->
-                <div class="form-test-group">
-                    <div class="input-and-label">
-                        <label for="full-name">Full name:</label>
-                        <input type="text" id="full-name" name="full-name" placeholder="Full Name">
-                    </div>
+     
+    <div class="topbar-menu-overlay" hidden></div>
+    <aside class="topbar-menu" hidden aria-label="Menu">
+        <div class="topbar-menu-header">
+            <span class="topbar-menu-title">Auto Clicker - Form Helper</span>
+            <button class="topbar-menu-close" type="button" aria-label="Fechar menu">×</button>
+        </div>
+        <div class="topbar-menu-section">
+            <a class="topbar-menu-link" href="index.html#docs">Docs</a>
+            <a class="topbar-menu-link" href="index.html#teste">Teste</a>
+            <a class="topbar-menu-link" href="index.html#privacy">Políticas de privacidade</a>
+            <a class="topbar-menu-link" href="options.html">Extensão</a>
+        </div>
+        <div class="topbar-menu-section topbar-menu-section-social">
+            <a class="topbar-menu-iconlink" href="https://github.com/Boydayno10/Auto_Click_Iframe" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 499.36" role="img" class="navbar-nav-svg" height="16" width="16">
+                    <title>GitHub</title>
+                    <path fill="currentColor" fill-rule="evenodd" d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z"></path>
+                </svg>
+                <span>GitHub</span>
+            </a>
+            <a class="topbar-menu-iconlink" href="https://www.youtube.com/@mozinsanou4136" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" role="img" class="navbar-nav-svg" height="16" width="16">
+                    <title>YouTube</title>
+                    <path fill="currentColor" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path>
+                </svg>
+                <span>YouTube</span>
+            </a>
+        </div>
+    </aside>
 
-                    <div class="xpath-container">
-                        <p class="xpath-title">XPath & CSS:</p>
-                        <p class="xpath-display">XPath: //input[@id='full-name']</p>
-                        <p class="xpath-display">CSS: #full-name</p>
-                    </div>
+    <main class="landing" aria-label="Conteúdo principal">
+        <section id="inicio" class="landing-section" data-section="inicio">
+            <div class="landing-hero landing-hero--center">
+                <h1 class="landing-title">Auto Clicker - Form Helper</h1>
+                <p class="landing-subtitle">
+                    Automatize cliques e preenchimentos em sites e iframes com controle simples e rápido.
+                </p>
+                <div class="landing-cta">
+                    <a class="landing-btn primary" href="https://github.com/Boydayno10/Auto_Click_Iframe" target="_blank" rel="noopener noreferrer">Download</a>
+                    <a class="landing-btn" href="index.html#docs">Documentation</a>
                 </div>
 
-                <!-- USERNAME -->
-                <div class="form-test-group">
-                    <div class="input-and-label">
-                        <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" placeholder="Your Username">
-                    </div>
-
-                    <div class="xpath-container">
-                        <p class="xpath-title">XPath & CSS:</p>
-                        <p class="xpath-display">XPath: //input[@id='username']</p>
-                        <p class="xpath-display">CSS: #username</p>
-                    </div>
+                <div class="landing-iframe-wrap landing-iframe-wrap--video" aria-label="Vídeo de demonstração">
+                    <iframe
+                        src="https://www.youtube.com/embed/kFrv9AMWbno?si=jYLvyBag7jsirwcq"
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen
+                    ></iframe>
                 </div>
 
-                <!-- FIRST NAME -->
-                <div class="form-test-group">
-                    <div class="input-and-label">
-                        <label for="first-name">First name:</label>
-                        <input type="text" id="first-name" name="first-name" placeholder="First Name">
-                    </div>
+                <div class="landing-features" aria-label="Recursos">
+                    <div class="landing-grid">
+                        <div class="landing-card">
+                            <h2 class="landing-card-title">Automação rápida</h2>
+                            <ul class="landing-list">
+                                <li>Crie cliques com intervalo e repetição</li>
+                                <li>Ative ou pause perfis com 1 clique</li>
+                            </ul>
+                        </div>
 
-                    <div class="xpath-container">
-                        <p class="xpath-title">XPath & CSS:</p>
-                        <p class="xpath-display">XPath: //input[@id='first-name']</p>
-                        <p class="xpath-display">CSS: #first-name</p>
-                    </div>
-                </div>
-
-                <!-- LAST NAME -->
-                <div class="form-test-group">
-                    <div class="input-and-label">
-                        <label for="last-name">Last name:</label>
-                        <input type="text" id="last-name" name="last-name" placeholder="Last Name">
-                    </div>
-
-                    <div class="xpath-container">
-                        <p class="xpath-title">XPath & CSS:</p>
-                        <p class="xpath-display">XPath: //input[@id='last-name']</p>
-                        <p class="xpath-display">CSS: #last-name</p>
+                        <div class="landing-card">
+                            <h2 class="landing-card-title">Formulários inteligentes</h2>
+                            <ul class="landing-list">
+                                <li>Fill por XPath ou CSS Selector</li>
+                                <li>Funciona em páginas e iframes dinâmicos</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-
-                <!-- EMAIL -->
-                <div class="form-test-group">
-                    <div class="input-and-label">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="your.email@example.com">
-                    </div>
-
-                    <div class="xpath-container">
-                        <p class="xpath-title">XPath & CSS:</p>
-                        <p class="xpath-display">XPath: //input[@id='email']</p>
-                        <p class="xpath-display">CSS: #email</p>
-                    </div>
-                </div>
-
-                <!-- PASSWORD -->
-                <div class="form-test-group">
-                    <div class="input-and-label">
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" placeholder="Your Password">
-                    </div>
-
-                    <div class="xpath-container">
-                        <p class="xpath-title">XPath & CSS:</p>
-                        <p class="xpath-display">XPath: //input[@id='password']</p>
-                        <p class="xpath-display">CSS: #password</p>
-                    </div>
-                </div>
-
-                <!-- REGISTER BUTTON -->
-                <div class="form-test-group">
-                    <div class="input-and-label">
-                        <button type="button" id="registerButton" class="register-button">Register</button>
-                    </div>
-
-                    <div class="xpath-container">
-                        <p class="xpath-title">XPath & CSS:</p>
-                        <p class="xpath-display">XPath 1: //button[@id='registerButton']</p>
-                        <p class="xpath-display">XPath 2: //button[text()='Register']</p>
-                        <p class="xpath-display">XPath 3: //button[contains(@class, 'register-button')]</p>
-
-                        <p class="xpath-display">CSS 1: #registerButton</p>
-                        <p class="xpath-display">CSS 2: button.register-button</p>
-                        <p class="xpath-display">CSS 3: button#registerButton</p>
-                    </div>
-                </div>
-
-                <p id="registrationMessage" class="registration-success-message" style="display: none;">Successfully registered!</p>
             </div>
         </section>
 
-        <section id="politicas" class="conteudo">
-            <h2>Privacy Policy</h2>
+        <section id="docs" class="landing-section docs-section" data-section="docs" hidden>
+            <div class="docs-layout">
+                <aside class="docs-sidebar" aria-label="Tópicos da documentação">
+                    <div class="docs-sidebar-header">Docs</div>
+                    <select class="docs-topic-select" id="docs-topic-select" aria-label="Tópicos">
+                        <option value="doc-start">Iniciar</option>
+                        <option value="doc-install">Instalação</option>
+                        <option value="doc-config">Criar configuração</option>
+                        <option value="doc-capture">Capturar elementos</option>
+                        <option value="doc-actions">Tipos de ação</option>
+                        <option value="doc-interval">Intervalo & repetição</option>
+                        <option value="doc-dynamic">Iframes & dinâmicos</option>
+                        <option value="doc-advanced">Modo avançado</option>
+                        <option value="doc-scripts">UserScripts</option>
+                        <option value="doc-blacklist">Blacklist</option>
+                        <option value="doc-feedback">Feedback FloatBox</option>
+                        <option value="doc-import">Exportar & importar</option>
+                        <option value="doc-troubleshoot">Solução de problemas</option>
+                    </select>
+                    <div class="docs-topic-list" id="docs-topic-list" role="tablist" aria-label="Tópicos">
+                        <button class="docs-topic active" type="button" data-doc-target="doc-start" role="tab" aria-selected="true">Iniciar</button>
+                        <button class="docs-topic" type="button" data-doc-target="doc-install" role="tab" aria-selected="false">Instalação</button>
+                        <button class="docs-topic" type="button" data-doc-target="doc-config" role="tab" aria-selected="false">Criar configuração</button>
+                        <button class="docs-topic" type="button" data-doc-target="doc-capture" role="tab" aria-selected="false">Capturar elementos</button>
+                        <button class="docs-topic" type="button" data-doc-target="doc-actions" role="tab" aria-selected="false">Tipos de ação</button>
+                        <button class="docs-topic" type="button" data-doc-target="doc-interval" role="tab" aria-selected="false">Intervalo & repetição</button>
+                        <button class="docs-topic" type="button" data-doc-target="doc-dynamic" role="tab" aria-selected="false">Iframes & dinâmicos</button>
+                        <button class="docs-topic" type="button" data-doc-target="doc-advanced" role="tab" aria-selected="false">Modo avançado</button>
+                        <button class="docs-topic" type="button" data-doc-target="doc-scripts" role="tab" aria-selected="false">UserScripts</button>
+                        <button class="docs-topic" type="button" data-doc-target="doc-blacklist" role="tab" aria-selected="false">Blacklist</button>
+                        <button class="docs-topic" type="button" data-doc-target="doc-feedback" role="tab" aria-selected="false">Feedback FloatBox</button>
+                        <button class="docs-topic" type="button" data-doc-target="doc-import" role="tab" aria-selected="false">Exportar & importar</button>
+                        <button class="docs-topic" type="button" data-doc-target="doc-troubleshoot" role="tab" aria-selected="false">Solução de problemas</button>
+                    </div>
+                </aside>
 
-            <h3>1. Data Collection and Usage:</h3>
-            <p>This Extension was developed with your privacy in mind. It does not collect, store, monitor, transmit, or share any personally identifiable data or browsing information with the developer or third parties. All user-entered settings (such as XPaths, fill values, intervals, and repetition options) are stored exclusively in your browser's local storage (via chrome.storage.local). This information is never sent to external servers or accessed by any other entity.</p>
+                <div class="docs-content" role="region" aria-label="Conteúdo da documentação">
+                    <article id="doc-start" class="docs-article">
+                        <h2>Iniciar</h2>
+                        <p>O Auto Clicker - Form Helper automatiza cliques e preenchimentos em sites e iframes. Você cria uma configuração por site, define ações e deixa a extensão executar o fluxo automaticamente.</p>
+                        <ul>
+                            <li>Crie uma configuração para a URL alvo.</li>
+                            <li>Adicione ações (clique ou preencher) com intervalo e repetição.</li>
+                            <li>Ative a configuração e acompanhe pelo FloatBox.</li>
+                        </ul>
+                        <p>Se ainda não instalou, veja <button class="docs-inline-link" type="button" data-doc-target="doc-install">Instalação</button>. Se precisa aprender a criar a primeira configuração, vá em <button class="docs-inline-link" type="button" data-doc-target="doc-config">Criar configuração</button>.</p>
+                    </article>
 
-            <h3>2. Extension Permissions:</h3>
-            <p>The permissions requested by the Extension (storage, scripting, activeTab, tabs, webNavigation, contextMenus, <all_urls>) are strictly necessary for its core purpose: automating clicks and form filling on web pages. None of these permissions are used to collect data unrelated to the functionality of the Extension.</p>
+                    <article id="doc-install" class="docs-article">
+                        <h2>Instalação</h2>
+                        <p>Instale pela Chrome Web Store: <a class="landing-link" href="https://chromewebstore.google.com/detail/jgkeppcdhlodchbjljdiajbieephocnb?utm_source=item-share-cb" target="_blank" rel="noopener noreferrer">Abrir na Chrome Web Store</a>. Depois, fixe o ícone da extensão para acesso rápido.</p>
+                        <p>Após instalar, abra o painel em <button class="docs-inline-link" type="button" data-doc-target="doc-config">Criar configuração</button> e configure a URL alvo.</p>
+                    </article>
 
-            <h3>3. Data Security:</h3>
-            <p>Since all user data is stored locally on your device, its security depends on your browser and operating system protections. The Extension does not implement network security mechanisms because no data is transmitted.</p>
+                    <article id="doc-config" class="docs-article">
+                        <h2>Criar configuração</h2>
+                        <p>Cada configuração representa um site ou fluxo. Defina um nome, a URL e o atraso inicial (se precisar esperar o carregamento).</p>
+                        <ul>
+                            <li><strong>Nome:</strong> identifique o fluxo (ex.: Cadastro, Login, Checkout).</li>
+                            <li><strong>URL:</strong> deve ser a página principal onde a automação começa.</li>
+                            <li><strong>Atraso inicial:</strong> tempo antes da primeira ação.</li>
+                        </ul>
+                        <p>Depois de salvar, adicione ações em <button class="docs-inline-link" type="button" data-doc-target="doc-actions">Tipos de ação</button>.</p>
+                    </article>
 
-            <h3>4. Changes to This Privacy Policy:</h3>
-            <p>We reserve the right to update this privacy policy periodically. Any changes will be reflected on this page.</p>
+                    <article id="doc-capture" class="docs-article">
+                        <h2>Capturar elementos</h2>
+                        <p>Você pode capturar seletores de dois modos:</p>
+                        <ul>
+                            <li><strong>Automático:</strong> clique com o botão direito no elemento e use “Load Element”.</li>
+                            <li><strong>Manual:</strong> cole o XPath ou CSS Selector diretamente no campo.</li>
+                        </ul>
+                        <p>Se o elemento for dinâmico, consulte <button class="docs-inline-link" type="button" data-doc-target="doc-dynamic">Iframes & dinâmicos</button>.</p>
+                    </article>
 
-            <h3>Contact:</h3>
-            <p>If you have any questions or concerns regarding this privacy policy, please contact us at: <a href="sdankhey848@gmail.com">sdankhey848@gmail.com</a>.</p>
+                    <article id="doc-actions" class="docs-article">
+                        <h2>Tipos de ação</h2>
+                        <p>A extensão suporta ações de clique e preenchimento. Cada ação pode ter seu próprio intervalo e repetição.</p>
+                        <ul>
+                            <li><strong>Clique:</strong> dispara cliques no elemento encontrado.</li>
+                            <li><strong>Preencher:</strong> cola ou digita valores em inputs.</li>
+                            <li><strong>Copiar/Digitar:</strong> escolha o método no modal de edição.</li>
+                        </ul>
+                        <p>Para ritmo e repetição, veja <button class="docs-inline-link" type="button" data-doc-target="doc-interval">Intervalo & repetição</button>.</p>
+                    </article>
+
+                    <article id="doc-interval" class="docs-article">
+                        <h2>Intervalo & repetição</h2>
+                        <p>Controle quantas vezes cada ação roda e o tempo entre elas.</p>
+                        <ul>
+                            <li><strong>Intervalo (ms):</strong> tempo entre repetições da ação.</li>
+                            <li><strong>Repetir:</strong> número fixo, <strong>-2</strong> para loop infinito ou <strong>1</strong> para aplicar a todos os elementos.</li>
+                        </ul>
+                        <p>Se precisar de controle avançado, vá para <button class="docs-inline-link" type="button" data-doc-target="doc-advanced">Modo avançado</button>.</p>
+                    </article>
+
+                    <article id="doc-dynamic" class="docs-article">
+                        <h2>Iframes & dinâmicos</h2>
+                        <p>A extensão funciona em páginas com carregamento dinâmico e iframes. Quando o elemento não está no DOM imediatamente, use:</p>
+                        <ul>
+                            <li><strong>Mutation Observe:</strong> detecta quando o elemento aparece.</li>
+                            <li><strong>Sandbox “Forçar DOM”:</strong> melhora a captura em páginas restritas.</li>
+                        </ul>
+                        <p>Essas opções ficam no <button class="docs-inline-link" type="button" data-doc-target="doc-advanced">Modo avançado</button>.</p>
+                    </article>
+
+                    <article id="doc-advanced" class="docs-article">
+                        <h2>Modo avançado</h2>
+                        <p>Ative o modo avançado para liberar opções extras, incluindo Mutation Observe e controle do sandbox.</p>
+                        <ul>
+                            <li><strong>Mutation Observe:</strong> ações que aguardam o elemento aparecer.</li>
+                            <li><strong>Sandbox:</strong> escolha Padrão ou Forçar DOM.</li>
+                            <li><strong>Content Script:</strong> ajuste a estratégia de injeção.</li>
+                        </ul>
+                        <p>Quer scripts personalizados? Veja <button class="docs-inline-link" type="button" data-doc-target="doc-scripts">UserScripts</button>.</p>
+                    </article>
+
+                    <article id="doc-scripts" class="docs-article">
+                        <h2>UserScripts</h2>
+                        <p>Use o editor de UserScript para automações avançadas e rotinas específicas. Esses scripts podem complementar as ações da tabela.</p>
+                        <ul>
+                            <li>Crie scripts para casos complexos.</li>
+                            <li>Combine com ações de clique/preenchimento.</li>
+                            <li>Organize por configuração e URL.</li>
+                        </ul>
+                        <p>Para evitar automações em sites críticos, veja <button class="docs-inline-link" type="button" data-doc-target="doc-blacklist">Blacklist</button>.</p>
+                    </article>
+
+                    <article id="doc-blacklist" class="docs-article">
+                        <h2>Blacklist</h2>
+                        <p>Defina sites bloqueados para impedir automação acidental. Cada domínio bloqueado desativa a execução.</p>
+                        <ul>
+                            <li>Adicione um domínio por linha.</li>
+                            <li>Use para áreas sensíveis (bancos, redes sociais, etc.).</li>
+                        </ul>
+                        <p>Para acompanhar em tempo real, use <button class="docs-inline-link" type="button" data-doc-target="doc-feedback">Feedback FloatBox</button>.</p>
+                    </article>
+
+                    <article id="doc-feedback" class="docs-article">
+                        <h2>Feedback FloatBox</h2>
+                        <p>O FloatBox mostra o status das ações no canto da página, incluindo contadores, espera por elementos e conclusão.</p>
+                        <ul>
+                            <li>Ative em Configurações → Feedback.</li>
+                            <li>Ideal para depuração e confirmação do fluxo.</li>
+                        </ul>
+                        <p>Para transferir configurações, veja <button class="docs-inline-link" type="button" data-doc-target="doc-import">Exportar & importar</button>.</p>
+                    </article>
+
+                    <article id="doc-import" class="docs-article">
+                        <h2>Exportar & importar</h2>
+                        <p>Salve suas configurações em JSON para backup ou migração.</p>
+                        <ul>
+                            <li><strong>Exportar:</strong> gera um arquivo com todas as configs.</li>
+                            <li><strong>Importar:</strong> carrega configurações existentes.</li>
+                        </ul>
+                        <p>Se algo falhar, confira <button class="docs-inline-link" type="button" data-doc-target="doc-troubleshoot">Solução de problemas</button>.</p>
+                    </article>
+
+                    <article id="doc-troubleshoot" class="docs-article">
+                        <h2>Solução de problemas</h2>
+                        <p>Use este checklist rápido:</p>
+                        <ul>
+                            <li>URL da configuração corresponde ao site atual?</li>
+                            <li>Selector XPath/CSS continua válido?</li>
+                            <li>Elemento aparece após o carregamento? Use Mutation Observe.</li>
+                            <li>Sandbox está correto? Teste Forçar DOM.</li>
+                            <li>Blacklist não bloqueia o domínio?</li>
+                        </ul>
+                        <p>Se precisar revisar a estrutura, volte para <button class="docs-inline-link" type="button" data-doc-target="doc-start">Iniciar</button>.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section id="teste" class="landing-section test-section" data-section="teste" hidden>
+            <div class="test-layout">
+                <aside class="test-sidebar" aria-label="Tópicos de teste">
+                    <div class="test-sidebar-header">Teste</div>
+                    <select class="test-topic-select" id="test-topic-select" aria-label="Tópicos de teste">
+                        <option value="test-click">Clique</option>
+                        <option value="test-fill">Preenchimento</option>
+                        <option value="test-userscript">UserScript</option>
+                    </select>
+                    <div class="test-topic-list" role="tablist" aria-label="Tópicos">
+                        <button class="test-topic active" type="button" data-test-target="test-click" role="tab" aria-selected="true">Clique</button>
+                        <button class="test-topic" type="button" data-test-target="test-fill" role="tab" aria-selected="false">Preenchimento</button>
+                        <button class="test-topic" type="button" data-test-target="test-userscript" role="tab" aria-selected="false">UserScript</button>
+                    </div>
+                </aside>
+
+                <div class="test-content" role="region" aria-label="Conteúdo de testes">
+                    <article id="test-click" class="test-article">
+                        <h2>Teste de clique</h2>
+                        <p>Use estes botões para validar cliques com feedback imediato. Cada clique gera contagem animada.</p>
+
+                        <div class="test-card">
+                            <div class="test-selector">
+                                <div class="test-selector-line">
+                                    <span>XPath</span>
+                                    <code>//button[@data-test='click-primary']</code>
+                                    <button class="copy-btn" type="button" data-copy-value="//button[@data-test='click-primary']" aria-label="Copiar XPath">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                                <div class="test-selector-line">
+                                    <span>CSS</span>
+                                    <code>button[data-test="click-primary"]</code>
+                                    <button class="copy-btn" type="button" data-copy-value='button[data-test="click-primary"]' aria-label="Copiar CSS">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="test-action">
+                                <button class="test-btn" type="button" data-test-button data-test-id="click-primary">Clique rápido</button>
+                                <span class="test-count" aria-live="polite">0x</span>
+                                <span class="test-feedback" aria-live="polite"></span>
+                            </div>
+                        </div>
+
+                        <div class="test-card">
+                            <div class="test-selector">
+                                <div class="test-selector-line">
+                                    <span>XPath</span>
+                                    <code>//button[@data-test='click-secondary']</code>
+                                    <button class="copy-btn" type="button" data-copy-value="//button[@data-test='click-secondary']" aria-label="Copiar XPath">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                                <div class="test-selector-line">
+                                    <span>CSS</span>
+                                    <code>button[data-test="click-secondary"]</code>
+                                    <button class="copy-btn" type="button" data-copy-value='button[data-test="click-secondary"]' aria-label="Copiar CSS">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="test-action">
+                                <button class="test-btn secondary" type="button" data-test-button data-test-id="click-secondary">Clique duplo</button>
+                                <span class="test-count" aria-live="polite">0x</span>
+                                <span class="test-feedback" aria-live="polite"></span>
+                            </div>
+                        </div>
+
+                        <div class="test-card">
+                            <div class="test-selector">
+                                <div class="test-selector-line">
+                                    <span>XPath</span>
+                                    <code>//button[@data-test='click-ghost']</code>
+                                    <button class="copy-btn" type="button" data-copy-value="//button[@data-test='click-ghost']" aria-label="Copiar XPath">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                                <div class="test-selector-line">
+                                    <span>CSS</span>
+                                    <code>button[data-test="click-ghost"]</code>
+                                    <button class="copy-btn" type="button" data-copy-value='button[data-test="click-ghost"]' aria-label="Copiar CSS">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="test-action">
+                                <button class="test-btn ghost" type="button" data-test-button data-test-id="click-ghost">Clique suave</button>
+                                <span class="test-count" aria-live="polite">0x</span>
+                                <span class="test-feedback" aria-live="polite"></span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="test-fill" class="test-article">
+                        <h2>Teste de preenchimento</h2>
+                        <p>Campos prontos para testar preenchimento automático com seus seletores.</p>
+
+                        <div class="test-form">
+                            <div class="test-field">
+                                <label for="test-first-name">Nome</label>
+                                <input id="test-first-name" type="text" placeholder="Seu nome" autocomplete="given-name">
+                                <div class="test-selector-line">
+                                    <span>XPath</span>
+                                    <code>//input[@id='test-first-name']</code>
+                                    <button class="copy-btn" type="button" data-copy-value="//input[@id='test-first-name']" aria-label="Copiar XPath">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                                <div class="test-selector-line">
+                                    <span>CSS</span>
+                                    <code>#test-first-name</code>
+                                    <button class="copy-btn" type="button" data-copy-value="#test-first-name" aria-label="Copiar CSS">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="test-field">
+                                <label for="test-last-name">Sobrenome</label>
+                                <input id="test-last-name" type="text" placeholder="Seu sobrenome" autocomplete="family-name">
+                                <div class="test-selector-line">
+                                    <span>XPath</span>
+                                    <code>//input[@id='test-last-name']</code>
+                                    <button class="copy-btn" type="button" data-copy-value="//input[@id='test-last-name']" aria-label="Copiar XPath">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                                <div class="test-selector-line">
+                                    <span>CSS</span>
+                                    <code>#test-last-name</code>
+                                    <button class="copy-btn" type="button" data-copy-value="#test-last-name" aria-label="Copiar CSS">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="test-field">
+                                <label for="test-full-name">Nome completo</label>
+                                <input id="test-full-name" type="text" placeholder="Nome completo" autocomplete="name">
+                                <div class="test-selector-line">
+                                    <span>XPath</span>
+                                    <code>//input[@id='test-full-name']</code>
+                                    <button class="copy-btn" type="button" data-copy-value="//input[@id='test-full-name']" aria-label="Copiar XPath">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                                <div class="test-selector-line">
+                                    <span>CSS</span>
+                                    <code>#test-full-name</code>
+                                    <button class="copy-btn" type="button" data-copy-value="#test-full-name" aria-label="Copiar CSS">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="test-field test-field-password">
+                                <label for="test-password">Senha</label>
+                                <div class="test-password-wrap">
+                                    <input id="test-password" type="password" placeholder="Senha" autocomplete="new-password">
+                                    <button class="test-toggle-password" type="button" aria-pressed="false">Mostrar</button>
+                                </div>
+                                <div class="test-selector-line">
+                                    <span>XPath</span>
+                                    <code>//input[@id='test-password']</code>
+                                    <button class="copy-btn" type="button" data-copy-value="//input[@id='test-password']" aria-label="Copiar XPath">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                                <div class="test-selector-line">
+                                    <span>CSS</span>
+                                    <code>#test-password</code>
+                                    <button class="copy-btn" type="button" data-copy-value="#test-password" aria-label="Copiar CSS">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="test-field">
+                                <label for="test-email">Email</label>
+                                <input id="test-email" type="email" placeholder="email@exemplo.com" autocomplete="email">
+                                <div class="test-selector-line">
+                                    <span>XPath</span>
+                                    <code>//input[@id='test-email']</code>
+                                    <button class="copy-btn" type="button" data-copy-value="//input[@id='test-email']" aria-label="Copiar XPath">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                                <div class="test-selector-line">
+                                    <span>CSS</span>
+                                    <code>#test-email</code>
+                                    <button class="copy-btn" type="button" data-copy-value="#test-email" aria-label="Copiar CSS">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="test-field">
+                                <label for="test-username">Nome de utilizador</label>
+                                <input id="test-username" type="text" placeholder="usuario" autocomplete="username">
+                                <div class="test-selector-line">
+                                    <span>XPath</span>
+                                    <code>//input[@id='test-username']</code>
+                                    <button class="copy-btn" type="button" data-copy-value="//input[@id='test-username']" aria-label="Copiar XPath">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                                <div class="test-selector-line">
+                                    <span>CSS</span>
+                                    <code>#test-username</code>
+                                    <button class="copy-btn" type="button" data-copy-value="#test-username" aria-label="Copiar CSS">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="test-field">
+                                <label for="test-age">Idade</label>
+                                <input id="test-age" type="number" placeholder="0" min="0" max="120">
+                                <div class="test-selector-line">
+                                    <span>XPath</span>
+                                    <code>//input[@id='test-age']</code>
+                                    <button class="copy-btn" type="button" data-copy-value="//input[@id='test-age']" aria-label="Copiar XPath">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                                <div class="test-selector-line">
+                                    <span>CSS</span>
+                                    <code>#test-age</code>
+                                    <button class="copy-btn" type="button" data-copy-value="#test-age" aria-label="Copiar CSS">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="test-userscript" class="test-article">
+                        <h2>Teste de UserScript</h2>
+                        <p>Cole um script ou use o modelo abaixo. Substitua os marcadores pelos seletores reais.</p>
+
+                        <div class="test-script-area">
+                            <div class="test-code-header">
+                                <span>UserScript modelo</span>
+                                <button class="copy-btn" type="button" data-copy-target="#test-userscript-template" aria-label="Copiar script">
+                                    <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                </button>
+                            </div>
+                            <textarea class="test-script" id="test-userscript-template" rows="12" spellcheck="false">
+(function () {
+    'use strict';
+
+    const MESSAGE = 'Olá, esta é uma mensagem automática 🚀';
+    const TYPE_DELAY = 50; // ms entre letras
+
+    // Função para obter elemento via XPath
+    function getByXPath(xpath) {
+        return document.evaluate(
+            xpath,
+            document,
+            null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE,
+            null
+        ).singleNodeValue;
+    }
+
+    const input = getByXPath("//input[@id='test-message']");
+    const sendButton = getByXPath("//button[@data-test-send]");
+
+    if (!input || !sendButton) {
+        console.warn('❌ Input ou botão não encontrado');
+        return;
+    }
+
+    // Foca no input
+    input.focus();
+    input.value = '';
+
+    let index = 0;
+
+    // Simula digitação humana
+    const typingInterval = setInterval(() => {
+        input.value += MESSAGE[index];
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+
+        index++;
+
+        if (index >= MESSAGE.length) {
+            clearInterval(typingInterval);
+
+            // Pequeno delay antes de clicar
+            setTimeout(() => {
+                sendButton.click();
+                console.log('✅ Mensagem enviada');
+            }, 300);
+        }
+    }, TYPE_DELAY);
+
+})();
+                            </textarea>
+
+                            <div class="test-script-hints">
+                                <div class="test-selector-line">
+                                    <span>Troque pelo veraddeiro botao oi input</span>
+                                    <code>&lt;INPUT_XPATH_OU_CSS&gt;</code>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="test-send-area">
+                            <div class="test-field">
+                                <label for="test-message">Mensagem</label>
+                                <input id="test-message" type="text" placeholder="Texto para colar">
+                                <div class="test-selector-line">
+                                    <span>XPath</span>
+                                    <code>//input[@id='test-message']</code>
+                                    <button class="copy-btn" type="button" data-copy-value="//input[@id='test-message']" aria-label="Copiar XPath">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                                <div class="test-selector-line">
+                                    <span>CSS</span>
+                                    <code>#test-message</code>
+                                    <button class="copy-btn" type="button" data-copy-value="#test-message" aria-label="Copiar CSS">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="test-send-action">
+                                <button class="test-btn primary" type="button" data-test-send>Enviar</button>
+                                <span class="test-send-status" aria-live="polite"></span>
+                                <div class="test-selector-line">
+                                    <span>XPath</span>
+                                    <code>//button[@data-test-send]</code>
+                                    <button class="copy-btn" type="button" data-copy-value="//button[@data-test-send]" aria-label="Copiar XPath">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                                <div class="test-selector-line">
+                                    <span>CSS</span>
+                                    <code>button[data-test-send]</code>
+                                    <button class="copy-btn" type="button" data-copy-value="button[data-test-send]" aria-label="Copiar CSS">
+                                        <img class="copy-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAALVBMVEUAAAD//////////////////////////////////////////////////////////////////+wC7K8AAAADXRSTlMAAQIDBAUGBwgJCgsMDg6RQ0kAAAAkSURBVBjTY2AgDGAQYGBgYEAQxgAJGJkYkYGBgYFQAAByYwQb+xQ3LAAAAABJRU5ErkJggg==" alt="">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section id="privacy" class="landing-section privacy-section" data-section="privacy" hidden>
+            <div class="privacy-layout">
+                <aside class="privacy-sidebar" aria-label="Tópicos de privacidade">
+                    <div class="privacy-sidebar-header">Políticas</div>
+                    <select class="privacy-topic-select" id="privacy-topic-select" aria-label="Tópicos de privacidade">
+                        <option value="privacy-policy">Políticas</option>
+                        <option value="privacy-contact">Contacto</option>
+                    </select>
+                    <div class="privacy-topic-list" role="tablist" aria-label="Tópicos">
+                        <button class="privacy-topic active" type="button" data-privacy-target="privacy-policy" role="tab" aria-selected="true">Políticas</button>
+                        <button class="privacy-topic" type="button" data-privacy-target="privacy-contact" role="tab" aria-selected="false">Contacto</button>
+                    </div>
+                </aside>
+
+                <div class="privacy-content" role="region" aria-label="Conteúdo da privacidade">
+                    <article id="privacy-policy" class="privacy-article">
+                        <h2>Políticas de privacidade</h2>
+                        <ol>
+                            <li><strong>Coleta e uso de dados:</strong> Esta extensão foi desenvolvida com a sua privacidade em mente. Ela não coleta, armazena, monitora, transmite ou compartilha quaisquer dados pessoais identificáveis ou informações de navegação com o desenvolvedor ou terceiros. Todas as configurações inseridas pelo usuário (como XPaths, valores de preenchimento, intervalos e opções de repetição) são armazenadas exclusivamente no armazenamento local do seu navegador (via chrome.storage.local). Essas informações nunca são enviadas para servidores externos nem acessadas por qualquer outra entidade.</li>
+                            <li><strong>Permissões da extensão:</strong> As permissões solicitadas pela extensão (storage, scripting, activeTab, tabs, webNavigation, contextMenus) são estritamente necessárias para seu propósito principal: automatizar cliques e preenchimento de formulários em páginas web. Nenhuma dessas permissões é usada para coletar dados que não estejam relacionados à funcionalidade da extensão.</li>
+                            <li><strong>Segurança dos dados:</strong> Como todos os dados do usuário ficam armazenados localmente no seu dispositivo, a segurança depende das proteções do seu navegador e do sistema operacional. A extensão não implementa mecanismos de segurança de rede porque nenhum dado é transmitido.</li>
+                            <li><strong>Alterações nesta política de privacidade:</strong> Reservamo-nos o direito de atualizar esta política de privacidade periodicamente. Quaisquer alterações serão refletidas nesta página.</li>
+                        </ol>
+                    </article>
+
+                    <article id="privacy-contact" class="privacy-article">
+                        <h2>Contacto</h2>
+                        <p>Para dúvidas ou preocupações sobre esta política de privacidade, entre em contacto:</p>
+                        <div class="privacy-contact-card">
+                            <div class="privacy-contact-item">
+                                <span>Email</span>
+                                <a href="mailto:sdankhey848@gmail.com">sdankhey848@gmail.com</a>
+                            </div>
+                            <div class="privacy-contact-item">
+                                <span>Telefone</span>
+                                <a href="tel:+258850653117">+258 850 653 117</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>© 2025 Auto Clicker - Form Helper. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="#politicas">Privacy Policy</a> |
-            <a href="#politicas">Contact</a>
-        </div>
-    </footer>
+    <script src="navbar.js"></script>
+    <script src="settings-processing.js"></script>
+    <script src="index-processing.js"></script>
 
-    <script src="script.js"></script>
 </body>
 </html>
